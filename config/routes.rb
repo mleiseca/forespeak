@@ -1,7 +1,10 @@
 Forespeak::Application.routes.draw do
+  get "markets/index"
+
   get "users/index"
 
   resources :users
+  resources :markets
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
