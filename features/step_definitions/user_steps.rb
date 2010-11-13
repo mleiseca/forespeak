@@ -1,9 +1,8 @@
 
 Given /^I have users named (.+)$/ do |usernames|
   usernames.split(', ').each do |name|
-      Users.create(:name => name)
+      User.create(:name => name)
   end
-
 end
 
 
