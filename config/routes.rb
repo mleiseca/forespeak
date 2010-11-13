@@ -1,10 +1,16 @@
 Forespeak::Application.routes.draw do
+  # get "market_management/index"
+  # get "market_management/create"
+  # get "market_management/close"
+  # get "market_management/edit"
+  
   get "markets/index"
-
   get "users/index"
 
   resources :users
   resources :markets
+  
+  resources :market_management, :module => 'admin'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
