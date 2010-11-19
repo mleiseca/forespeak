@@ -10,7 +10,7 @@ Forespeak::Application.routes.draw do
   resources :users
   resources :markets
   
-  resources :market_management, :module => 'admin'
+  resources :market_management, :module => 'admin', :path => "/admin/markets"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
