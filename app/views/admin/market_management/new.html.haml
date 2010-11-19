@@ -1,0 +1,11 @@
+
+= form_for @market, :as =>:market, :url => { :action => "new" }, :html => {:class => "nifty_form"} do |f|	
+
+  %p  
+    Name: 
+    = f.text_field :name
+  %p  
+    Start Date: 
+    = f.text_field :start_date
+  %p 
+    = submit_tag 'Create'

@@ -3,7 +3,8 @@ class Admin::MarketManagementController < ApplicationController
     @markets = Market.all
   end 
 
-  def create
+  def new
+    @market = Market.new
   end
 
   def close

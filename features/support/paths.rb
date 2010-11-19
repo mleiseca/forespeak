@@ -17,6 +17,9 @@ module NavigationHelpers
     when /the market administration list/
       market_management_index_path
  
+    when /new market page/
+      new_market_management_path
+      
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

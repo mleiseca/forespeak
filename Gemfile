@@ -7,6 +7,8 @@ gem 'rails', '3.0.1'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
+gem 'haml'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -37,7 +39,7 @@ end
 
 group :test do
   gem 'rspec'
-  gem 'webrat', '0.7.1'
+  gem 'webrat'
   gem 'spork'
   gem 'autotest'
   gem "autotest-rails"
