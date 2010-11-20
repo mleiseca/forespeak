@@ -39,6 +39,7 @@ end
 
 group :test do
   gem 'rspec'
+  gem 'rspec-rails', '>=2.0.1'
   gem 'webrat'
   gem 'spork'
   gem 'autotest'

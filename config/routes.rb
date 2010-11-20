@@ -6,11 +6,14 @@ Forespeak::Application.routes.draw do
   
   get "markets/index"
   get "users/index"
+  
+  post "admin/markets"
 
   resources :users
   resources :markets
   
   resources :market_management, :module => 'admin', :path => "/admin/markets"
+  match 'admin/markets/:id/close' => 'admin/market_management#close', :via => :post
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
