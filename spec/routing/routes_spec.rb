@@ -11,4 +11,11 @@ describe "Market Management routing" do
       :controller => 'admin/market_management',
       :action => 'create')
   end
+  
+  it "routes /" do
+    { :get => "/"}.should route_to(
+      :controller => 'root',
+      :action => 'index')
+  end
+  
 end

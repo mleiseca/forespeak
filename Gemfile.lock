@@ -74,6 +74,9 @@ GEM
       term-ansicolor (~> 1.0.5)
     haml (3.0.24)
     i18n (0.4.2)
+    jquery-rails (0.2.5)
+      rails (~> 3.0)
+      thor (~> 0.14.4)
     json (1.4.6)
     json_pure (1.4.6)
     launchy (0.3.7)
@@ -150,6 +153,7 @@ DEPENDENCIES
   factory_girl_rails (= 1.0)
   faker (= 0.3.1)
   haml
+  jquery-rails
   launchy
   rails (= 3.0.1)
   rspec

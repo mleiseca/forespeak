@@ -9,6 +9,8 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'haml'
 
+gem 'jquery-rails'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -36,6 +38,7 @@ group :development do
   gem 'annotate-models', '1.0.4'
   gem 'faker', '0.3.1'
 end
+
 
 group :test do
   gem 'rspec'

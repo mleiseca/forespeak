@@ -1,5 +1,7 @@
 Forespeak::Application.routes.draw do
   
+  match '/' => 'root#index'
+
   get "users/index"
   
   resources :users
