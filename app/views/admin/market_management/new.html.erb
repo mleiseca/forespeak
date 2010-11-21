@@ -1,8 +1,9 @@
 
-<%= form_for :market, @market, :url => { :action => "create" }, :html => {:class => "nifty_form"} do |f| %>
+<%= form_for @market, :as => :market, :url => { :action => "create" }, :html => {:class => "nifty_form"} do |f| %>
 
 
   <p>Name: <%= f.text_field :name %>
+  <p>Start Date: <%= f.text_field :start_date %>
 
   <%= submit_tag "Create" %>
 <% end %>
