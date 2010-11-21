@@ -1,16 +1,9 @@
 Forespeak::Application.routes.draw do
-  # get "market_management/index"
-  # get "market_management/create"
-  # get "market_management/close"
-  # get "market_management/edit"
   
-  get "markets/index"
   get "users/index"
   
-  post "admin/markets"
-
   resources :users
-  resources :markets
+  match '/markets' => 'markets#index'
   
   resources :market_management, :module => 'admin', :path => "/admin/markets"
   match 'admin/markets/:id/close' => 'admin/market_management#close', :via => :post

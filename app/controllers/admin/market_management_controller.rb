@@ -7,12 +7,16 @@ class Admin::MarketManagementController < ApplicationController
     @market = Market.new
   end
   
+  def show 
+  end 
+  
   
   def create
     # todo: needs test
     @market = Market.new(params[:market])
     if @market.save
-      redirect_to @market, :notice => 'Successfully created market'
+      flash[:notice]  = 'Successfully created market'
+      redirect_to market_management_path(@market)
     else
       render :action => 'new'
     end

@@ -5,10 +5,6 @@ describe "Market Management routing" do
       :action => "close",
       :id => "2")
   end
-    # 
-    # it "routes /admi/markets/:id? " do
-    #   { :get => "/widgets/1/edit" }.should_not be_routable
-    # end
     
   it "routes /admin/markets" do
     { :post => "/admin/markets"}.should route_to(
