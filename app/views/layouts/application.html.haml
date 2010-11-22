@@ -21,7 +21,16 @@
 						%li 
 							%a{:title=>'Leaderboard', :href => '/users'} Leaderboard
 				.span-4#user_navigation
-					=link_to 'Register', new_user_path
+					-if current_user
+						=link_to 'Edit Profile', edit_user_path(:current)
+						|
+						%a{:href => :logout} Logout 						
+					-else 
+						=link_to 'Register', new_user_path
+						|
+						%a{:href => :login} Login 
+						
+					
 			.span-24.last#content
 				- [:notice, :error, :message].each do |key| 
 					- unless flash[key].blank? 
