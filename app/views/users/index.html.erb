@@ -1,4 +1,16 @@
-<% for user in @users %>
-	<%= user.name %> : $<%= user.cash %>
-  
-<% end %>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Cash</th>
+  </tr>
+  <% for user in @users %>
+    <tr>
+      <td><%= user.username %></td>
+      <td><%= user.email %></td>
+      <td><%= user.cash %></td>
+      <td><%= link_to "Show", user %></td>
+    </tr>
+  <% end %>
+</table>

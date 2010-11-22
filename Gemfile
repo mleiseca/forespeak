@@ -11,6 +11,10 @@ gem 'haml'
 gem 'haml-rails'
 
 gem 'jquery-rails'
+
+gem 'authlogic'
+
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -37,6 +41,7 @@ group :development do
   gem 'rspec-rails', '>=2.0.1'
   gem 'annotate-models', '1.0.4'
   gem 'faker', '0.3.1'
+	gem "nifty-generators"
 end
 
 
@@ -48,6 +53,7 @@ group :test do
   gem 'autotest'
   gem "autotest-rails"
   gem 'factory_girl_rails', '1.0'
+	gem "mocha"
 end
 
 group :cucumber do
