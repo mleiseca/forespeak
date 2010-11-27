@@ -2,9 +2,9 @@ Forespeak::Application.routes.draw do
   
   resources :user_sessions
 
-  match '/' => 'root#index'
-  match 'login' , :controller => 'user_sessions', :action => 'new'
-  match 'logout', :controller => 'user_sessions', :action => 'destroy'
+  match '/' => 'root#index' ,:as => :root
+  match 'login' , :controller => 'user_sessions', :action => 'new', :as => :login
+  match 'logout', :controller => 'user_sessions', :action => 'destroy', :as => :logout
 
   # get "users/index"
   
