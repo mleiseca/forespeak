@@ -16,8 +16,9 @@ describe UserSessionsController do
   end
 
   it "create action should redirect when model is valid" do
-    UserSession.any_instance.stubs(:valid?).returns(true)
-    post :create
+    # note: couldn't stub here, was getting this error: undefined method `persistence_token' for nil:NilClass
+    # UserSession.any_instance.stubs(:valid?).returns(true)
+    post 'create', :user_session => { :name => 'fakeuser', :password => 'fakepassword' }
     response.should redirect_to(root_url)
   end
   
