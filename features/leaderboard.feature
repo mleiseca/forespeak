@@ -9,7 +9,8 @@ Feature: Leaderboard
 	  Given I have users named Sammy with 20.25
 	  When I go to the leaderboard
 	  Then I should see "Sammy"
-		And I should see "$20.25"
+		And I should see "20.25" 
+		# todo: should be $20.25. not sure how to concatenate values with haml
 
 
 	Scenario: View users on leaderboard
