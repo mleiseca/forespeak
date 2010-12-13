@@ -1,23 +1,30 @@
-User management - create an account
-User management - login
-User management - email confirmation for account creation
-User management - logout
+== Administration == 
+Admin - create a market with several mutually exclusive outcomes and be able to define the initial cost for each outcome. The sum of the initial costs should be $100
+Admin - edit the current prices for the outcomes within a market
+Admin - give $100 to some number of investors that I choose
 
-Leaderboard - as an investor, i'd like to see how I stand relative to others. So I'd like to sort by net worth (cash + market value in each market)
-Leaderboard - as a user, I'd like to hide/show closed markets
+== Market display == 
+!!!  Leaderboard - as an investor, i'd like to see how I stand relative to others. So I'd like to sort by net worth (cash + market value in each market)
 Leaderboard - as a user, for a market I'd like to see my holdings in the market
-
-Investor - buy shares in an outcome
-Investor - sell shares in an outcome that I have a position. If I don't have a position, I shouldn't be able to sell.
+Leaderboard - as a user, for a market I'd like to see a chart for the price changes in each outcome for a market
 Investor - see a list of all the markets that have closed and how I did in that market
 
+
+== Perform trades == 
+Investor - buy shares in an outcome
+Investor - sell shares in an outcome that I have a position. If I don't have a position, I shouldn't be able to sell.
 Market maker - buy shares from a user when the user tries to sell
 Market maker - sell shares to a user when the user tries to buy
 Market maker - when I buy/sell shares from a user, I'd like to adjust the price for the outcome that the user bought sold. In doing this, I also need to adjust the prices for the other outcomes in the market so that they all add to $100
+Market maker - each time I adjust the price for an outcome, I would like to log the new value to the database
 
-Admin - create a market with several mutually exclusive outcomes and be able to define the initial cost for each outcome
-Admin - edit the current prices for the outcomes within a market
+== Market closing == 
 Admin - close a market. I should select the winning outcome and then investors should be paid.
-Admin - give $100 to each investor
-Admin - give $100 to one investor
+Leaderboard - as a user, I'd like to hide/show closed markets
 
+
+== User management == 
+* User management - create an account
+* User management - login
+* User management - logout
+? User management - email confirmation for account creation
