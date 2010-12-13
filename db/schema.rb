@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101128204215) do
+ActiveRecord::Schema.define(:version => 20101213195016) do
 
   create_table "markets", :force => true do |t|
     t.string   "name"
@@ -39,14 +39,14 @@ ActiveRecord::Schema.define(:version => 20101128204215) do
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "email"
-    t.decimal  "cash"
+    t.decimal  "cash",               :default => 0.0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "crypted_password",                  :null => false
-    t.string   "password_salt",                     :null => false
-    t.string   "persistence_token",                 :null => false
-    t.integer  "login_count",        :default => 0, :null => false
-    t.integer  "failed_login_count", :default => 0, :null => false
+    t.string   "crypted_password",                    :null => false
+    t.string   "password_salt",                       :null => false
+    t.string   "persistence_token",                   :null => false
+    t.integer  "login_count",        :default => 0,   :null => false
+    t.integer  "failed_login_count", :default => 0,   :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"

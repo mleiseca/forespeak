@@ -1,15 +1,22 @@
-? download haml reference
-? download rails tutorial
+? textmate shortcuts for moving around file?
+? using rspec to check for model validation? need to check for particular error
+
 
 == Administration == 
 NOW!!! Admin - create a market - several mutually exclusive outcomes and be able to define the initial cost for each outcome. The sum of the initial costs should be $100
+  -> outcomes within a market should have unique names
 Admin - create a market - should be able to add an arbitrary number of outcomes 
 Admin - edit the current prices for the outcomes within a market
 Admin - give $100 to some number of investors that I choose
-NOW!!!   Admin - need features to be able to log in
+PUSHBACK!!!   Admin - need features to be able to log in
+	-> not sure how to make privileged account with authlogic
 
 == Market display == 
-NOW!!!  Leaderboard - as an investor, i'd like to see how I stand relative to others. So I'd like to sort by net worth (cash + market value in each market)
+PUSHBACK!!!  Leaderboard - as an investor, i'd like to see how I stand relative to others. So I'd like to sort by net worth (cash + market value in each market)
+	-> not sure how to sort by an object field in ruby :-(
+	-> maybe get pdf of pickaxe book?
+	-> how to format cash so that it has 2 decimal places?
+	
 Leaderboard - as a user, for a market I'd like to see my holdings in the market
 Leaderboard - as a user, for a market I'd like to see a chart for the price changes in each outcome for a market
 Investor - see a list of all the markets that have closed and how I did in that market
