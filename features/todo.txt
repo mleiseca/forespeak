@@ -1,5 +1,5 @@
 == Administration == 
-Admin - create a market with several mutually exclusive outcomes and be able to define the initial cost for each outcome. The sum of the initial costs should be $100
+!!! Admin - create a market with several mutually exclusive outcomes and be able to define the initial cost for each outcome. The sum of the initial costs should be $100
 Admin - edit the current prices for the outcomes within a market
 Admin - give $100 to some number of investors that I choose
 

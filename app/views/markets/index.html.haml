@@ -2,3 +2,7 @@
 	- @markets.each do |market|
 		.market 
 			= market.name
+			- market.outcomes do |outcome|
+				.outcome
+					= outcome.start_price
+					(there should be a current price here...)
