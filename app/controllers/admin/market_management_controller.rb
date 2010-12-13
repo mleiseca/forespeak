@@ -5,6 +5,7 @@ class Admin::MarketManagementController < ApplicationController
 
   def new
     @market = Market.new
+    3.times { @market.outcomes.build }
   end
   
   def show 

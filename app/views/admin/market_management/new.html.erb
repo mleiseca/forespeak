@@ -1,9 +1,18 @@
 
 <%= form_for @market, :as => :market, :url => { :action => "create" }, :html => {:class => "nifty_form"} do |f| %>
+	<%= render "shared/error_messages", :target => @market %>  
 
 
   <p>Name: <%= f.text_field :name %>
   <p>Start Date: <%= f.text_field :start_date %>
 
+	<% f.fields_for :outcomes do |builder| %>
+		<p>
+			<%= builder.label :description, "Description" %>
+			<%= builder.text_field :description %>
+			<%= builder.label :start_price, "Start Price" %>
+			<%= builder.text_field :start_price %>
+		</p>
+	<% end %>
   <%= submit_tag "Create" %>
 <% end %>
