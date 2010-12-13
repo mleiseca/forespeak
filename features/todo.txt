@@ -1,10 +1,11 @@
 ? textmate shortcuts for moving around file?
 ? using rspec to check for model validation? need to check for particular error
+? .DEPRECATION WARNING: Errors#on have been deprecated, use Errors#[] instead.
+Also note that the behaviour of Errors#[] has changed. Errors#[] now always returns an Array. An empty Array is returned when there are no errors on the specified attribute. (called from /Users/mleiseca/dev/rails/forespeak/spec/models/market_spec.rb:63)
+
 
 
 == Administration == 
-NOW!!! Admin - create a market - several mutually exclusive outcomes and be able to define the initial cost for each outcome. The sum of the initial costs should be $100
-  -> outcomes within a market should have unique names
 Admin - create a market - should be able to add an arbitrary number of outcomes 
 Admin - edit the current prices for the outcomes within a market
 Admin - give $100 to some number of investors that I choose
