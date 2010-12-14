@@ -48,7 +48,7 @@ describe Market do
   
     market = Market.new(:name => 'fake name', :outcomes => outcomes_98, :start_date => '12/12/2010')
     market.should_not be_valid
-    market.errors.on(:outcomes).should == "Outcome start prices must total 100"
+    market.errors.on(:outcomes).should == "start prices must total 100"
   end
   
   it "should not be valid if its outcomes have a duplicate name" do
@@ -60,6 +60,6 @@ describe Market do
   
     market = Market.new(:name => 'fake name', :outcomes => outcomes_with_duplicate_name, :start_date => '12/12/2010')
     market.should_not be_valid
-    market.errors.on(:outcomes).should == "Outcomes must have unique names"
+    market.errors.on(:outcomes).should == "must have unique names"
   end
 end

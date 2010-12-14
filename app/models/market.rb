@@ -17,13 +17,13 @@ class OutcomeStartPriceValidator < ActiveModel::Validator
         current_total += o.start_price
       end
       if outcome_descriptions.include?(o.description)
-        record.errors[:outcomes] << "Outcomes must have unique names"
+        record.errors[:outcomes] << "must have unique names"
       end
       outcome_descriptions << o.description
     end 
     
     if current_total != 100 
-      record.errors[:outcomes] << "Outcome start prices must total 100"
+      record.errors[:outcomes] << "start prices must total 100"
     end
   end
 end

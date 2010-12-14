@@ -6,8 +6,8 @@ Also note that the behaviour of Errors#[] has changed. Errors#[] now always retu
 
 
 == Administration == 
-Admin - create a market - should be able to add an arbitrary number of outcomes 
-Admin - edit the current prices for the outcomes within a market
+NOW!!! Admin - create a market - should be able to add an arbitrary number of outcomes 
+NOW!!! Admin - edit the current prices for the outcomes within a market
 Admin - give $100 to some number of investors that I choose
 PUSHBACK!!!   Admin - need features to be able to log in
 	-> not sure how to make privileged account with authlogic

@@ -7,12 +7,9 @@
   <p>Start Date: <%= f.text_field :start_date %>
 
 	<% f.fields_for :outcomes do |builder| %>
-		<p>
-			<%= builder.label :description, "Description" %>
-			<%= builder.text_field :description %>
-			<%= builder.label :start_price, "Start Price" %>
-			<%= builder.text_field :start_price %>
-		</p>
+    <%= render "outcome_fields", :f => builder %>
 	<% end %>
+	<p><%= link_to_add_fields "Add Outcome", f, :outcomes %></p>
+	
   <%= submit_tag "Create" %>
 <% end %>
