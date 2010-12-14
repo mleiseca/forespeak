@@ -1,8 +1,19 @@
 .span-24#leaderboard
 	- @markets.each do |market|
-		.market 
-			= market.name
-			- market.outcomes do |outcome|
-				.outcome
-					= outcome.start_price
-					(there should be a current price here...)
+		.market
+			.span-4
+				.market-description
+					= market.name
+				.market-start
+					= market.start_date
+			.span-20.last
+				%table.outcome
+					%th Outcomes
+					%th Start Price
+					%th Current Price
+					
+					- market.outcomes.each do |outcome|
+						%tr
+							%td= outcome.description
+							%td= outcome.start_price
+							%td Current Price??

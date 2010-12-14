@@ -24,7 +24,7 @@ Scenario: Outcomes start prices should add to 100
 	And I fill in "market_outcomes_attributes_2_start_price" with "25" 
 	And I press "Create"
   Then I should see "prohibited this record from being saved"
-	And I should see "Outcome start prices must total 100"
+	And I should see "Outcomes start prices must total 100"
 
 
 

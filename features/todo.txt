@@ -3,17 +3,21 @@
 ? .DEPRECATION WARNING: Errors#on have been deprecated, use Errors#[] instead.
 Also note that the behaviour of Errors#[] has changed. Errors#[] now always returns an Array. An empty Array is returned when there are no errors on the specified attribute. (called from /Users/mleiseca/dev/rails/forespeak/spec/models/market_spec.rb:63)
 
+== Get trading working == 
+Admin - give $100 to some number of investors that I choose
+Investor - buy shares in an outcome
+Market maker - sell shares to a user when the user tries to buy
+
 
 
 == Administration == 
-NOW!!! Admin - create a market - should be able to add an arbitrary number of outcomes 
-NOW!!! Admin - edit the current prices for the outcomes within a market
-Admin - give $100 to some number of investors that I choose
-PUSHBACK!!!   Admin - need features to be able to log in
+Admin - edit the current prices for the outcomes within a market
+Admin - should have to log in to do admin-type activities 
 	-> not sure how to make privileged account with authlogic
+	-> not sure how this works with webrat
 
 == Market display == 
-PUSHBACK!!!  Leaderboard - as an investor, i'd like to see how I stand relative to others. So I'd like to sort by net worth (cash + market value in each market)
+Leaderboard - as an investor, i'd like to see how I stand relative to others. So I'd like to sort by net worth (cash + market value in each market)
 	-> not sure how to sort by an object field in ruby :-(
 	-> maybe get pdf of pickaxe book?
 	-> how to format cash so that it has 2 decimal places?
@@ -24,10 +28,8 @@ Investor - see a list of all the markets that have closed and how I did in that 
 
 
 == Perform trades == 
-Investor - buy shares in an outcome
 Investor - sell shares in an outcome that I have a position. If I don't have a position, I shouldn't be able to sell.
 Market maker - buy shares from a user when the user tries to sell
-Market maker - sell shares to a user when the user tries to buy
 Market maker - when I buy/sell shares from a user, I'd like to adjust the price for the outcome that the user bought sold. In doing this, I also need to adjust the prices for the other outcomes in the market so that they all add to $100
 Market maker - each time I adjust the price for an outcome, I would like to log the new value to the database
 
