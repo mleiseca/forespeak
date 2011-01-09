@@ -13,7 +13,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 
 gem 'authlogic'
-
+gem "declarative_authorization", :git => "git://github.com/stffn/declarative_authorization.git"
 
 # Use unicorn as the web server
 # gem 'unicorn'

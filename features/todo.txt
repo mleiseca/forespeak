@@ -3,6 +3,7 @@
 ? .DEPRECATION WARNING: Errors#on have been deprecated, use Errors#[] instead.
 Also note that the behaviour of Errors#[] has changed. Errors#[] now always returns an Array. An empty Array is returned when there are no errors on the specified attribute. (called from /Users/mleiseca/dev/rails/forespeak/spec/models/market_spec.rb:63)
 
+
 == Get trading working == 
 Admin - give $100 to some number of investors that I choose
 Investor - buy shares in an outcome
@@ -43,3 +44,6 @@ Leaderboard - as a user, I'd like to hide/show closed markets
 * User management - login
 * User management - logout
 ? User management - email confirmation for account creation
+
+References:
+http://johnivanoff.blogspot.com/2010/06/create-rails-3-beta-with-authlogic.html

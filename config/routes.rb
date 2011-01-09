@@ -1,5 +1,7 @@
 Forespeak::Application.routes.draw do
   
+  resources :roles
+
   resources :user_sessions
 
   match '/' => 'root#index' ,:as => :root
@@ -13,7 +15,7 @@ Forespeak::Application.routes.draw do
   
   resources :market_management, :module => 'admin', :path => "/admin/markets"
   match 'admin/markets/:id/close' => 'admin/market_management#close', :via => :post
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

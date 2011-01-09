@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101213195016) do
+ActiveRecord::Schema.define(:version => 20110109220824) do
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "markets", :force => true do |t|
     t.string   "name"
@@ -25,6 +32,12 @@ ActiveRecord::Schema.define(:version => 20101213195016) do
     t.integer  "market_id"
     t.string   "description"
     t.decimal  "start_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

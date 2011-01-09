@@ -10,6 +10,9 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+    when /the new role page/
+      new_role_path
+
     when /the leaderboard/
       users_path
     when /the market list/
