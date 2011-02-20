@@ -1,0 +1,3 @@
+rails generate migration AddAdminFlagToUsers admin:boolean
+
+rails generate migration AddDetailsToProducts part_number:string price:decimal

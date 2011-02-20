@@ -4,6 +4,16 @@
 Also note that the behaviour of Errors#[] has changed. Errors#[] now always returns an Array. An empty Array is returned when there are no errors on the specified attribute. (called from /Users/mleiseca/dev/rails/forespeak/spec/models/market_spec.rb:63)
 
 
+== For work!!==
+- sell shares
+- close market
+- leaderboard should show value of market positions
+
+drop column position outcome_price_post_transaction
+drop column outcome.start_price
+
+
+
 == Get trading working == 
 Admin - give $100 to some number of investors that I choose
 Investor - buy shares in an outcome

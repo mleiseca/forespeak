@@ -10,7 +10,7 @@ class MarketsController < ApplicationController
     
     current_position = outcome.position_for_user(current_user)
     
-    share_count = 1
+    share_count = 10
     total_shares = share_count
     if ! current_position.nil?
       total_shares += current_position.total_user_shares
@@ -22,8 +22,9 @@ class MarketsController < ApplicationController
       :delta_user_shares => share_count,
       :delta_user_account_value=> -1 * share_count * outcome.current_price,
       :total_user_shares => total_shares,
-      :transaction_type => :buy,
+      :direction => :buy,
       :outcome_price => outcome.current_price + 1
+      # :outcome_price_post_transaction => determine_new_price(outcome)
       )
     
     if position.save

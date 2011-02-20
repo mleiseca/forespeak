@@ -7,7 +7,7 @@
 			= current_user.username
 		.span-20.last#usercash
 			You have $
-			=current_user.cash
+			= "%0.2f" % current_user.cash
 	
 
 .span-24#leaderboard
@@ -21,22 +21,22 @@
 			.span-20.last
 				%table.outcome
 					%th Outcomes
-					%th Start Price
 					%th Current Price
 					%th Shares Owned
+					%th Total Shares Purchased
 					%th
 					
 					- market.outcomes.each do |outcome|
 						%tr
 							%td= outcome.description
-							%td= outcome.start_price
-							%td= outcome.current_price
+							%td= "%0.4f" % outcome.current_price
 							- p = outcome.position_for_user(current_user)
 							%td 
 								- if !p.nil?
 									= p.total_user_shares
+							%td
+								= outcome.shares_purchased 
 							%td 
-								= outcome.current_price
 								- if ! current_user.nil? 								
 									= form_tag :controller => "markets", :action => "buy", :method => "post" do
 										= hidden_field_tag :outcome_id, outcome.id
