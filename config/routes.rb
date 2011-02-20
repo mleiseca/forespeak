@@ -12,6 +12,8 @@ Forespeak::Application.routes.draw do
   match '/markets' => 'markets#index'
   
   match '/resupply' => 'users#resupply'
+
+  match '/buy' => 'markets#buy'
   
   resources :market_management, :module => 'admin', :path => "/admin/markets"
   match 'admin/markets/:id/close' => 'admin/market_management#close', :via => :post

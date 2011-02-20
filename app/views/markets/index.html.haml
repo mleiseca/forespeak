@@ -1,3 +1,15 @@
+.span-24#errors
+	= render "shared/error_messages", :target => @position
+
+- if ! current_user.nil?
+	.span-24#user_summary
+		.span-4#username
+			= current_user.username
+		.span-20.last#usercash
+			You have $
+			=current_user.cash
+	
+
 .span-24#leaderboard
 	- @markets.each do |market|
 		.market
@@ -11,9 +23,23 @@
 					%th Outcomes
 					%th Start Price
 					%th Current Price
+					%th Shares Owned
+					%th
 					
 					- market.outcomes.each do |outcome|
 						%tr
 							%td= outcome.description
 							%td= outcome.start_price
-							%td Current Price??
+							%td= outcome.current_price
+							- p = outcome.position_for_user(current_user)
+							%td 
+								- if !p.nil?
+									= p.total_user_shares
+							%td 
+								= outcome.current_price
+								- if ! current_user.nil? 								
+									= form_tag :controller => "markets", :action => "buy", :method => "post" do
+										= hidden_field_tag :outcome_id, outcome.id
+										= submit_tag "Buy"
+								
+							

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110219210309) do
+ActiveRecord::Schema.define(:version => 20110220174358) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(:version => 20110219210309) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+# Could not dump table "positions" because of following StandardError
+#   Unknown type 'type' for column 'transaction_type'
 
   create_table "roles", :force => true do |t|
     t.string   "name"
