@@ -8,10 +8,10 @@ Forespeak::Application.routes.draw do
   match 'login' , :controller => 'user_sessions', :action => 'new', :as => :login
   match 'logout', :controller => 'user_sessions', :action => 'destroy', :as => :logout
 
-  # get "users/index"
-  
   resources :users
   match '/markets' => 'markets#index'
+  
+  match '/resupply' => 'users#resupply'
   
   resources :market_management, :module => 'admin', :path => "/admin/markets"
   match 'admin/markets/:id/close' => 'admin/market_management#close', :via => :post

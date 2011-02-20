@@ -11,3 +11,10 @@
 			%td= user.email
 			%td= user.cash
 			%td= link_to "Show", user
+
+
+- if ! current_user.nil? && current_user.admin?
+	= form_tag :controller => "users", :action => "resupply", :method => "post" do
+		= text_field_tag(:amount)
+		= submit_tag "Resupply"
+	

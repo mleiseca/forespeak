@@ -34,4 +34,15 @@ class UsersController < ApplicationController
       render :action => 'edit'
     end
   end
+  
+  def resupply
+    amount = params[:amount]
+    if amount.match(/^\d+/)
+      User.find_each do |user|
+        user.cash = user.cash + amount.to_i
+        user.save()
+      end 
+    end
+    redirect_to users_path
+  end
 end
