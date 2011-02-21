@@ -3,6 +3,9 @@
 ? .DEPRECATION WARNING: Errors#on have been deprecated, use Errors#[] instead.
 Also note that the behaviour of Errors#[] has changed. Errors#[] now always returns an Array. An empty Array is returned when there are no errors on the specified attribute. (called from /Users/mleiseca/dev/rails/forespeak/spec/models/market_spec.rb:63)
 
+1892.50 
+61.3429
+1279.07
 
 == For work!!==
 - sell shares

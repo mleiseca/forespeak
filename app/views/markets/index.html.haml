@@ -40,6 +40,11 @@
 								- if ! current_user.nil? 								
 									= form_tag :controller => "markets", :action => "buy", :method => "post" do
 										= hidden_field_tag :outcome_id, outcome.id
-										= submit_tag "Buy"
+										= submit_tag "Buy 10 shares"
+									- if !p.nil? && p.total_user_shares > 0 
+										= form_tag :controller => "markets", :action => "sell", :method => "post" do
+											= hidden_field_tag :outcome_id, outcome.id
+											= submit_tag "Sell 10 shares"
+									
 								
-							
+								
