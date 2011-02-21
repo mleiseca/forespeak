@@ -34,7 +34,6 @@ class Outcome < ActiveRecord::Base
     # But a larger “b” also means the market has more liquidity or depth, meaning that traders can buy more shares at 
     # or near the current price without causing massive price swings.
 
-
     sum_of_current_costs = 0
     sum_of_future_costs = 0
     market.outcomes.each do |o|
@@ -63,14 +62,24 @@ class Outcome < ActiveRecord::Base
   def shares_available
     available_shares =  SHARES_AVAILABLE
     
-    users = User.find( :all, :joins => :positions, :conditions => ['positions.outcome_id = ?', id])
+    positions = all_user_positions
     
-    users.find do |user| 
-      position = position_for_user(user)
+    positions.each do |position| 
       available_shares = available_shares - position.total_user_shares
     end
     
     return available_shares
+  end
+  
+  def all_user_positions
+    users = User.find( :all, :joins => :positions, :conditions => ['positions.outcome_id = ?', id])
+    
+    positions = []
+    users.find do |user| 
+      positions.push position_for_user(user)
+    end
+
+    positions
   end
   
   

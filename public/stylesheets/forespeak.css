@@ -5,7 +5,53 @@ display: inline;
 list-style-type: none;
 padding-right: 20px;
 }
-
+/*
 #site_navigation{
     margin-top: 30px;
+}*/
+
+#site_title{
+    font-weight: bold;
+    font-size: 24pt;
+}
+
+#content{
+    margin-top: 15px;
+}
+
+
+.flash_notice {
+	background: #FFF6BF;
+	border-top: 2px solid #FFD324;
+	border-bottom: 2px solid #FFD324;
+	text-align: left;
+	margin: 10px auto;
+	padding: 5px 20px;
+	}
+	
+.flash_error {
+	background: #FFCCCC;
+	border-top: 2px solid #FF0000;
+	border-bottom: 2px solid #FF0000;
+	text-align: left;
+	margin: 10px auto;
+	padding: 5px 20px;
+	}
+	
+/*
+body {
+    background: #FFFFCC;
+}*/
+
+#navigation_list{
+    padding-left: 0px;
+}
+#user_summary{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#username, #usercash{
+    font-weight: bold;
+    font-size: 18pt;
 }

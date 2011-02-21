@@ -17,7 +17,8 @@ Forespeak::Application.routes.draw do
   match '/sell' => 'markets#sell'
   
   resources :market_management, :module => 'admin', :path => "/admin/markets"
-  match 'admin/markets/:id/close' => 'admin/market_management#close', :via => :post
+  # match 'admin/markets/:id/close' => 'admin/market_management#close', :via => :post
+  match '/admin/markets/close' => 'admin/market_management#close'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

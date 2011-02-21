@@ -42,6 +42,8 @@ class UsersController < ApplicationController
         user.cash = user.cash + amount.to_i
         user.save()
       end 
+    else
+      flash[:error] = "Invalid amount: #{amount}"
     end
     redirect_to users_path
   end

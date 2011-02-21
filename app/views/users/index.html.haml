@@ -4,13 +4,15 @@
 		%th Username
 		%th Email
 		%th Cash
+		%th Current Positions Value
 			
 	- @users.each do |user|
 		%tr
 			%td= user.username
 			%td= user.email
 			%td= "%0.2f" % user.cash
-			%td= link_to "Show", user
+			/ %td= link_to "Show", user
+			%td= "%0.2f" % user.all_positions_value
 
 
 - if ! current_user.nil? && current_user.admin?

@@ -8,10 +8,6 @@ class Admin::MarketManagementController < ApplicationController
     3.times { @market.outcomes.build }
   end
   
-  def show 
-  end 
-  
-  
   def create
     # todo: needs test
     @market = Market.new(params[:market])
@@ -24,9 +20,26 @@ class Admin::MarketManagementController < ApplicationController
   end
 
   def close
-  end
+    outcome = Outcome.find(params[:outcome_id])
+    
+    market = outcome.market
+    if market.nil? || ! market.end_date.nil?
+      # todo: test
+      flash[:error] = "Market has already be closed"
+    end
+    
+    positions = outcome.all_user_positions
+    
+    positions.each do |position|
+      user = position.user
+      user.cash = user.cash + (position.total_user_shares * 100)
+      user.save
+    end
+    
+    market.end_date = Time.now
+    market.save
 
-  def edit
+    redirect_to market_management_index_path
   end
-
+  
 end

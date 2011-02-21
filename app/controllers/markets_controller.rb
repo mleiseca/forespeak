@@ -1,6 +1,6 @@
 class MarketsController < ApplicationController
   def index
-    @markets = Market.all
+    @markets = Market.find(:all, :conditions => ['end_date is null'])    
   end
 
   def sell
@@ -12,12 +12,8 @@ class MarketsController < ApplicationController
     share_count = 10
     
     if current_position.nil? || (current_position.total_user_shares < share_count)
-      # todo: how to show general error?
-      # position.errors[:user] << "you have insufficient shares"
-      # @position = position
-      index
-      render :action => 'index'
-      return 
+      flash[:error] = "You don't have any shares to sell"      
+      return redirect_to markets_path    
     else
       total_shares = current_position.total_user_shares - share_count
     end
@@ -41,11 +37,9 @@ class MarketsController < ApplicationController
       flash[:notice] = "Sell successful."
       redirect_to markets_path    
     else
-      logger.info "Errors creating position: " + position.errors.to_s
-      @position = position
+      flash[:error] = position.errors
       
-      index
-      render :action => 'index'
+      redirect_to markets_path    
     end
   end
   
@@ -87,11 +81,9 @@ class MarketsController < ApplicationController
       flash[:notice] = "Buy successful."
       redirect_to markets_path    
     else
-      logger.info "Errors creating position: " + position.errors.to_s
-      @position = position
-      
-      index
-      render :action => 'index'
+      flash[:error] = position.errors
+      # flash[:error] = "Couldn't buy shares"
+      redirect_to markets_path    
     end
     
   end

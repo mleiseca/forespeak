@@ -15,4 +15,25 @@ class User < ActiveRecord::Base
       role.name.underscore.to_sym
     end
   end
+  
+  def all_positions_value
+    
+    # todo: named_scope?
+    active_markets = Market.find(:all, :conditions => ['end_date is null'])    
+    
+    total = 0
+    # todo: what's the nice ruby way to do this?
+    active_markets.each do |market|
+      market.outcomes.each do |outcome|
+        position = outcome.position_for_user(self)
+        if ! position.nil?
+          total += position.total_user_shares * outcome.current_price
+        end
+      end      
+    end
+
+    
+    total
+    
+  end
 end

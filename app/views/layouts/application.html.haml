@@ -11,16 +11,13 @@
 	%body
 		.container#wrapper 
 			.span-24#header 
-				.span-8#logo
-					= image_tag('Lee_Rising_Sun2.jpg', :size => '263x135')
-				.span-12.last#site_navigation
-					%h1 Forespeak 
-					%ol#navigation_list
-						%li 
-							%a{:title=>'Markets', :href => '/markets'} Markets
-						%li 
-							%a{:title=>'Leaderboard', :href => '/users'} Leaderboard
-				.span-4#user_navigation
+				.span-21
+					#site_title
+						Forespeak 
+					%a{:title=>'Markets', :href => '/markets'} Markets 
+					| 
+					%a{:title=>'Leaderboard', :href => '/users'} Leaderboard
+				.span-3.last
 					-if current_user
 						=link_to 'Edit Profile', edit_user_path(:current)
 						|

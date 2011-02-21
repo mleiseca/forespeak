@@ -1,0 +1,31 @@
+
+- @markets.each do |market|
+	.span-24.market
+		.span-9
+			.span-3
+				= market.name
+			.span-3
+				= market.start_date
+			.span-3.last
+				= market.end_date
+		.span-15.last
+			- if market.end_date.nil?
+				%table.outcome
+					%th Outcomes
+					%th Current Price
+					%th Total Shares Purchased
+					%th
+				
+					- market.outcomes.each do |outcome|
+						%tr
+							%td= outcome.description
+							%td= "%0.4f" % outcome.current_price
+							%td
+								= outcome.shares_purchased 
+							%td
+								= form_tag :controller => "market_management", :action => "close", :method => "post" do
+									= hidden_field_tag :outcome_id, outcome.id					
+									= submit_tag "Select outcome"
+			
+
+= link_to "Create market", new_market_management_path
