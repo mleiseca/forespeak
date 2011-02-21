@@ -18,7 +18,7 @@ class MarketsController < ApplicationController
       total_shares = current_position.total_user_shares - share_count
     end
     
-    current_price = outcome.current_price
+    current_price = outcome.sell_price
     position = Position.new(
       :outcome => outcome, 
       :user => current_user, 
@@ -34,7 +34,7 @@ class MarketsController < ApplicationController
       logger.info "Created position: " + position.to_s
       current_user.cash = current_user.cash + position.delta_user_account_value
       current_user.save
-      flash[:notice] = "Sell successful."
+      flash[:message] = "Sell successful."
       redirect_to markets_path    
     else
       flash[:error] = position.errors
@@ -52,17 +52,15 @@ class MarketsController < ApplicationController
     share_count = 10
     total_shares = share_count
     if outcome.shares_available < share_count
-      # todo: how to show general error?
-      index
-      render :action => 'index'
-      return
+      flash[:error] = "There are not enough shares available"
+      return redirect_to markets_path    
     end
 
     if ! current_position.nil?
       total_shares += current_position.total_user_shares
     end
     
-    current_price = outcome.current_price
+    current_price = outcome.buy_price
     
     position = Position.new(
       :outcome => outcome, 
@@ -78,11 +76,10 @@ class MarketsController < ApplicationController
       logger.info "Created position: " + position.to_s
       current_user.cash = current_user.cash + position.delta_user_account_value
       current_user.save
-      flash[:notice] = "Buy successful."
+      flash[:message] = "Buy successful."
       redirect_to markets_path    
     else
       flash[:error] = position.errors
-      # flash[:error] = "Couldn't buy shares"
       redirect_to markets_path    
     end
     

@@ -21,7 +21,8 @@
 			.span-20.last
 				%table.outcome
 					%th Outcomes
-					%th Current Price
+					%th Sell Price
+					%th Buy Price
 					%th Shares Owned
 					%th Total Shares Purchased
 					%th
@@ -29,7 +30,8 @@
 					- market.outcomes.each do |outcome|
 						%tr
 							%td= outcome.description
-							%td= "%0.4f" % outcome.current_price
+							%td= "%0.4f" % outcome.sell_price
+							%td= "%0.4f" % outcome.buy_price
 							- p = outcome.position_for_user(current_user)
 							%td 
 								- if !p.nil?
@@ -38,13 +40,13 @@
 								= outcome.shares_purchased 
 							%td 
 								- if ! current_user.nil? 								
-									= form_tag :controller => "markets", :action => "buy", :method => "post" do
-										= hidden_field_tag :outcome_id, outcome.id
-										= submit_tag "Buy 10 shares"
 									- if !p.nil? && p.total_user_shares > 0 
 										= form_tag :controller => "markets", :action => "sell", :method => "post" do
 											= hidden_field_tag :outcome_id, outcome.id
-											= submit_tag "Sell 10 shares"
+											= submit_tag "Sell 10 shares " + "$%0.2f" % (outcome.sell_price * 10)
+									= form_tag :controller => "markets", :action => "buy", :method => "post" do
+										= hidden_field_tag :outcome_id, outcome.id
+										= submit_tag "Buy 10 shares " + "$%0.2f" % (outcome.buy_price * 10)
 								
 								
 								

@@ -12,14 +12,16 @@
 			- if market.end_date.nil?
 				%table.outcome
 					%th Outcomes
-					%th Current Price
+					%th Sell Price
+					%th Buy Price
 					%th Total Shares Purchased
 					%th
 				
 					- market.outcomes.each do |outcome|
 						%tr
 							%td= outcome.description
-							%td= "%0.4f" % outcome.current_price
+							%td= "%0.4f" % outcome.sell_price
+							%td= "%0.4f" % outcome.buy_price
 							%td
 								= outcome.shares_purchased 
 							%td

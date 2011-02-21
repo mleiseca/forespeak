@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
       market.outcomes.each do |outcome|
         position = outcome.position_for_user(self)
         if ! position.nil?
-          total += position.total_user_shares * outcome.current_price
+          total += position.total_user_shares * ((outcome.buy_price + outcome.sell_price) /2)
         end
       end      
     end

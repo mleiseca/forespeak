@@ -11,6 +11,7 @@ Also note that the behaviour of Errors#[] has changed. Errors#[] now always retu
 3199.13
 20 shares
 
+865.69 + 222.33
 
 == For work!!==
 - sell shares

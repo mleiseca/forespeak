@@ -12,7 +12,23 @@ class Outcome < ActiveRecord::Base
   SHARES_TO_PURCHASE = 10
   SHARES_AVAILABLE = 1000
   
-  def current_price
+  def sell_price(share_count=nil)
+    if share_count.nil?
+      share_count = SHARES_TO_PURCHASE
+    end
+    return price_calculator(-1 * share_count)
+  end
+  
+  
+  def buy_price(share_count=nil)
+    if share_count.nil?
+      share_count = SHARES_TO_PURCHASE
+    end
+    return price_calculator(share_count)
+  end
+  
+  # delta_shares - positive means buy, negative means sell
+  def price_calculator(delta_shares)
 
     # http://blog.oddhead.com/2006/10/30/implementing-hansons-market-maker/
     #     The market maker keeps track of how many shares have been purchased by traders in total so far for each outcome: 
@@ -40,7 +56,7 @@ class Outcome < ActiveRecord::Base
       shares_purchased = o.shares_purchased
       if o.id == id
         logger.info "For found same outcome"
-        shares_purchased += SHARES_TO_PURCHASE
+        shares_purchased += delta_shares
       end
     
       sum_of_current_costs += (E ** (o.shares_purchased / B))
@@ -52,7 +68,7 @@ class Outcome < ActiveRecord::Base
     cost = future_cost - current_cost
     logger.info "******************** #{description} Found cost: #{future_cost} (#{sum_of_future_costs}) - #{current_cost} (#{sum_of_current_costs}) = #{cost}"
     
-    cost * (100 / SHARES_TO_PURCHASE)
+    cost * (100 / delta_shares)
   end
 
   def shares_purchased
