@@ -1,0 +1,14 @@
+!!! XML
+
+%markets
+  - @markets.each do |market|
+    %market
+      %description= market.name
+      %start= market.start_date
+      %outcomes
+        - market.outcomes.each do |outcome|
+          %outcome
+            %description= outcome.description
+            %sell-price= outcome.sell_price
+            %buy-price= outcome.buy_price
+
