@@ -1,4 +1,5 @@
 class MarketsController < ApplicationController
+  
   def index
     @markets = Market.find(:all, :conditions => ['end_date is null'])    
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110221025326) do
+ActiveRecord::Schema.define(:version => 20110306173926) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20110221025326) do
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.boolean  "admin"
+    t.boolean  "confirmed",          :default => false
   end
 
 end

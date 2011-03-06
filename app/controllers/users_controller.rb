@@ -1,14 +1,19 @@
 class UsersController < ApplicationController
+  
+  skip_before_filter :require_user, :only => [:new, :create]
+  
+  
   def new
     @user = User.new
   end
   
   def index 
-    @users = User.all
+    @users = User.actors.confirmed.all
   end 
   
   def create
     @user = User.new(params[:user])
+    @user.cash = 10000
     if @user.save
       flash[:notice] = "Registration successful."
       redirect_to root_url

@@ -1,4 +1,7 @@
 class Admin::MarketManagementController < ApplicationController
+  
+  before_filter :require_admin_user
+  
   def index
     @markets = Market.all
   end 
