@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20110221025326) do
   create_table "outcomes", :force => true do |t|
     t.integer  "market_id"
     t.string   "description"
-    t.decimal  "start_price"
+    t.decimal  "start_price", :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,13 +39,14 @@ ActiveRecord::Schema.define(:version => 20110221025326) do
   create_table "positions", :force => true do |t|
     t.integer  "outcome_id"
     t.integer  "user_id"
-    t.decimal  "delta_user_shares"
-    t.decimal  "delta_user_account_value"
-    t.decimal  "total_user_shares"
-    t.decimal  "outcome_price"
+    t.decimal  "delta_user_shares",              :precision => 10, :scale => 0
+    t.decimal  "delta_user_account_value",       :precision => 10, :scale => 0
+    t.decimal  "total_user_shares",              :precision => 10, :scale => 0
+    t.string   "type"
+    t.decimal  "outcome_price",                  :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "outcome_price_post_transaction"
+    t.decimal  "outcome_price_post_transaction", :precision => 10, :scale => 0
     t.string   "direction"
   end
 
@@ -75,14 +76,14 @@ ActiveRecord::Schema.define(:version => 20110221025326) do
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "email"
-    t.decimal  "cash",               :default => 0.0, :null => false
+    t.decimal  "cash",               :precision => 10, :scale => 0, :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "crypted_password",                    :null => false
-    t.string   "password_salt",                       :null => false
-    t.string   "persistence_token",                   :null => false
-    t.integer  "login_count",        :default => 0,   :null => false
-    t.integer  "failed_login_count", :default => 0,   :null => false
+    t.string   "crypted_password",                                                 :null => false
+    t.string   "password_salt",                                                    :null => false
+    t.string   "persistence_token",                                                :null => false
+    t.integer  "login_count",                                       :default => 0, :null => false
+    t.integer  "failed_login_count",                                :default => 0, :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"

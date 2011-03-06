@@ -56,6 +56,10 @@ group :test do
 	gem "mocha"
 end
 
+group :production do
+	gem 'ruby-mysql'
+end
+
 group :cucumber do
   gem 'capybara'
   gem 'database_cleaner'

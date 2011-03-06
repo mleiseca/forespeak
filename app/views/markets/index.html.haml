@@ -12,7 +12,7 @@
 
 .span-24#leaderboard
 	- @markets.each do |market|
-		.market
+		.market.span-24.last
 			.span-4
 				.market-description
 					= market.name
@@ -23,7 +23,9 @@
 					%th Outcomes
 					%th Sell Price
 					%th Buy Price
-					%th Shares Owned
+					- if ! current_user.nil? 								
+						%th Shares Owned
+						
 					%th Total Shares Purchased
 					%th
 					
@@ -32,10 +34,11 @@
 							%td= outcome.description
 							%td= "%0.4f" % outcome.sell_price
 							%td= "%0.4f" % outcome.buy_price
-							- p = outcome.position_for_user(current_user)
-							%td 
-								- if !p.nil?
-									= p.total_user_shares
+							- if ! current_user.nil? 								
+								- p = outcome.position_for_user(current_user)
+								%td 
+									- if !p.nil?
+										= p.total_user_shares
 							%td
 								= outcome.shares_purchased 
 							%td 

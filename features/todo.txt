@@ -1,37 +1,29 @@
+data normalization + machine learning
+
+
 ? textmate shortcuts for moving around file?
 ? using rspec to check for model validation? need to check for particular error
 ? .DEPRECATION WARNING: Errors#on have been deprecated, use Errors#[] instead.
 Also note that the behaviour of Errors#[] has changed. Errors#[] now always returns an Array. An empty Array is returned when there are no errors on the specified attribute. (called from /Users/mleiseca/dev/rails/forespeak/spec/models/market_spec.rb:63)
 
-1892.50 
-61.3429
-1279.07
-
-
-3199.13
-20 shares
-
-865.69 + 222.33
-
-== For work!!==
-- sell shares
-- close market
-- leaderboard should show value of market positions
+sort leaderboard by cash + book value
 
 drop column position outcome_price_post_transaction
 drop column outcome.start_price
+
+== Closed markets ==
+- add field to outcome to show that it was the selected outcome
+- markets index: should be able to hide/show closed markets (or maybe separate page for closed markets)
+
+
+
 
 
 
 == Get trading working == 
 Admin - give $100 to some number of investors that I choose
-Investor - buy shares in an outcome
-Market maker - sell shares to a user when the user tries to buy
-
-
 
 == Administration == 
-Admin - edit the current prices for the outcomes within a market
 Admin - should have to log in to do admin-type activities 
 	-> not sure how to make privileged account with authlogic
 	-> not sure how this works with webrat
