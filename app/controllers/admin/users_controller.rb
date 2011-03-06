@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+  
+  before_filter :require_admin_user
   def index
     @unconfirmed_users = User.unconfirmed.all
     @confirmed_users = User.confirmed.all
@@ -12,6 +14,7 @@ class Admin::UsersController < ApplicationController
     
     redirect_to admin_users_path
   end
+  
   
   def unconfirm
     user = User.find(params[:user_id])

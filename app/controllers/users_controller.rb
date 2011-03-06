@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    @user.cash = 10000
     if @user.save
       flash[:notice] = "Registration successful."
       redirect_to root_url
