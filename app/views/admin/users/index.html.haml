@@ -1,0 +1,29 @@
+%h2 Unconfirmed Users
+%table
+	%tr
+		%th Username
+		%th 
+			
+	- @unconfirmed_users.each do |user|
+		%tr
+			%td= user.username
+			%td	
+				= form_tag :controller => "admin/users", :action => "confirm", :method => "post" do
+					= hidden_field_tag :user_id, user.id
+					= submit_tag "Confirm"
+		
+
+%h2 Confirmed Users
+%table
+	%tr
+		%th Username
+		%th 
+
+	- @confirmed_users.each do |user|
+		%tr
+			%td= user.username
+			%td	
+				= form_tag :controller => "admin/users", :action => "unconfirm", :method => "post" do
+					= hidden_field_tag :user_id, user.id
+					= submit_tag "Unconfirm"
+

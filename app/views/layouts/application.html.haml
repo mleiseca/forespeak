@@ -21,11 +21,11 @@
 					-if current_user
 						=link_to 'Edit Profile', edit_user_path(:current)
 						|
-						%a{:href => :logout} Logout 						
+						%a{:href => "/logout"} Logout 						
 					-else 
 						=link_to 'Register', new_user_path
 						|
-						%a{:href => :login} Login 
+						%a{:href => "/login"} Login 
 						
 					
 			.span-24.last#content
