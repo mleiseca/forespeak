@@ -14,6 +14,12 @@
 				.span-21
 					#site_title
 						Forespeak 
+					- if ! current_user.nil? && current_user.admin
+						%a{:title=>'Market Admin', :href => '/admin/markets'} Markets Admin
+						| 
+						%a{:title=>'User Admin', :href => '/admin/users'} User Admin
+						|
+						
 					%a{:title=>'Markets', :href => '/markets'} Markets 
 					| 
 					%a{:title=>'Leaderboard', :href => '/users'} Leaderboard

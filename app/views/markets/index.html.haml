@@ -6,8 +6,9 @@
 		.span-4#username
 			= current_user.username
 		.span-20.last#usercash
-			You have $
-			= "%0.2f" % current_user.cash
+			- if  ! current_user.admin
+				You have $
+				= "%0.2f" % current_user.cash
 	
 
 .span-24#leaderboard
@@ -39,7 +40,7 @@
 							%td
 								= outcome.shares_purchased 
 							%td 
-								- if ! current_user.nil? 								
+								- if ! current_user.nil? && ! current_user.admin								
 									- if !p.nil? && p.total_user_shares > 0 
 										= form_tag :controller => "markets", :action => "sell", :method => "post" do
 											= hidden_field_tag :outcome_id, outcome.id

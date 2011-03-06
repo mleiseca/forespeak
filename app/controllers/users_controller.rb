@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
   
   def index 
-    @users = User.all
+    @users = User.actors.confirmed.all
   end 
   
   def create

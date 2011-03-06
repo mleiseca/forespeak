@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20110306173926) do
     t.decimal  "delta_user_shares"
     t.decimal  "delta_user_account_value"
     t.decimal  "total_user_shares"
+    t.string   "type"
     t.decimal  "outcome_price"
     t.datetime "created_at"
     t.datetime "updated_at"
