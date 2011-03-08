@@ -72,19 +72,18 @@ class Outcome < ActiveRecord::Base
   end
 
   def shares_purchased
-    SHARES_AVAILABLE - shares_available
+    positions = all_user_positions
+
+    total_purchased = 0
+    positions.each do |position| 
+      total_purchased = total_purchased + position.total_user_shares
+    end
+    
+    total_purchased
   end
   
   def shares_available
-    available_shares =  SHARES_AVAILABLE
-    
-    positions = all_user_positions
-    
-    positions.each do |position| 
-      available_shares = available_shares - position.total_user_shares
-    end
-    
-    return available_shares
+    SHARES_AVAILABLE - shares_purchased
   end
   
   def all_user_positions
