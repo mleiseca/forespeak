@@ -63,3 +63,7 @@ body {
     font-weight: bold;
     font-size: 18pt;
 }
+
+.transaction_form input[type='number']{
+    width: 50px;
+}

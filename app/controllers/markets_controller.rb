@@ -9,7 +9,12 @@ class MarketsController < ApplicationController
     
     current_position = outcome.position_for_user(current_user)
     
-    share_count = 10
+    share_count = (params.include? :sell_share_count) ? params[:sell_share_count].to_i : 10
+
+    if share_count < 0
+      flash[:error] = "Invalid share count"
+      return redirect_to markets_path
+    end
     
     if current_position.nil? || (current_position.total_user_shares < share_count)
       flash[:error] = "You don't have any shares to sell"      
@@ -34,7 +39,10 @@ class MarketsController < ApplicationController
       logger.info "Created position: " + position.to_s
       current_user.cash = current_user.cash + position.delta_user_account_value
       current_user.save
-      flash[:message] = "Sell successful."
+      flash[:message] = "Sell successful -- " +
+          (-1 * position.delta_user_shares).truncate(2).to_s + " shares @ $" +
+          position.outcome_price.truncate(2).to_s + " got $" +
+          position.delta_user_account_value.truncate(2).to_s
       redirect_to markets_path    
     else
       flash[:error] = position.errors
@@ -48,8 +56,14 @@ class MarketsController < ApplicationController
     outcome = Outcome.find(outcome_id)
     
     current_position = outcome.position_for_user(current_user)
-    
-    share_count = 10
+
+    share_count = (params.include? :buy_share_count) ? params[:buy_share_count].to_i : 10
+
+    if share_count < 0
+      flash[:error] = "Invalid share count"
+      return redirect_to markets_path
+    end
+
     total_shares = share_count
     if outcome.shares_available < share_count
       flash[:error] = "There are not enough shares available"
@@ -76,7 +90,10 @@ class MarketsController < ApplicationController
       logger.info "Created position: " + position.to_s
       current_user.cash = current_user.cash + position.delta_user_account_value
       current_user.save
-      flash[:message] = "Buy successful."
+      flash[:message] = "Buy successful -- " +
+          position.delta_user_shares.truncate(2).to_s + " shares @ $" +
+          position.outcome_price.truncate(2).to_s + " cost " +
+          (-1 * position.delta_user_account_value).truncate(2).to_s
       redirect_to markets_path    
     else
       flash[:error] = position.errors
