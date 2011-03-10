@@ -10,87 +10,89 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110306173926) do
+ActiveRecord::Schema.define(:version => 20110309143540) do
 
   create_table "assignments", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "user_id"
+    t.integer   "role_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "markets", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.string    "description"
+    t.date      "start_date"
+    t.date      "end_date"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "outcomes", :force => true do |t|
-    t.integer  "market_id"
-    t.string   "description"
-    t.decimal  "start_price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "market_id"
+    t.string    "description"
+    t.decimal   "start_price"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "positions", :force => true do |t|
-    t.integer  "outcome_id"
-    t.integer  "user_id"
-    t.decimal  "delta_user_shares"
-    t.decimal  "delta_user_account_value"
-    t.decimal  "total_user_shares"
-    t.string   "type"
-    t.decimal  "outcome_price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.decimal  "outcome_price_post_transaction"
-    t.string   "direction"
+    t.integer   "outcome_id"
+    t.integer   "user_id"
+    t.decimal   "delta_user_shares"
+    t.decimal   "delta_user_account_value"
+    t.decimal   "total_user_shares"
+    t.string    "type"
+    t.decimal   "outcome_price"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.decimal   "outcome_price_post_transaction"
+    t.string    "direction"
   end
 
+  add_index "positions", ["user_id", "outcome_id"], :name => "index_positions_on_user_id_and_outcome_id"
+
   create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "session_id", :null => false
+    t.text      "data"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "user_sessions", :force => true do |t|
-    t.string   "username"
-    t.string   "password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "username"
+    t.string    "password"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username"
-    t.string   "email"
-    t.decimal  "cash",               :default => 0.0,   :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "crypted_password",                      :null => false
-    t.string   "password_salt",                         :null => false
-    t.string   "persistence_token",                     :null => false
-    t.integer  "login_count",        :default => 0,     :null => false
-    t.integer  "failed_login_count", :default => 0,     :null => false
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
-    t.boolean  "admin"
-    t.boolean  "confirmed",          :default => false
+    t.string    "username"
+    t.string    "email"
+    t.decimal   "cash",               :default => 0.0,   :null => false
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "crypted_password",                      :null => false
+    t.string    "password_salt",                         :null => false
+    t.string    "persistence_token",                     :null => false
+    t.integer   "login_count",        :default => 0,     :null => false
+    t.integer   "failed_login_count", :default => 0,     :null => false
+    t.timestamp "last_request_at"
+    t.timestamp "current_login_at"
+    t.timestamp "last_login_at"
+    t.string    "current_login_ip"
+    t.string    "last_login_ip"
+    t.boolean   "admin"
+    t.boolean   "confirmed",          :default => false
   end
 
 end

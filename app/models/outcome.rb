@@ -87,10 +87,10 @@ class Outcome < ActiveRecord::Base
   end
   
   def all_user_positions
-    users = User.find( :all, :joins => :positions, :conditions => ['positions.outcome_id = ?', id])
+    users = User.find( :all, :select => 'DISTINCT users.id ' , :joins => :positions, :conditions => ['positions.outcome_id = ?', id])
     
     positions = []
-    users.find do |user| 
+    users.each do |user| 
       positions.push position_for_user(user)
     end
 
