@@ -22,6 +22,7 @@ production:
   username: deployer
   password: flimflam
   host: localhost
+  socket: /var/lib/mysql/mysql.sock
   pool: 5
   timeout: 5000
 

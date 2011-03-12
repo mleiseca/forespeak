@@ -22,9 +22,19 @@ cap deploy:check
 		
 database set up
 
-deploying app
-	- (locally) bundle package
-	- 
+(remote) set up apache+passenger
+ - gem install passenger
+ - /sources/ruby-1.9.2-p180/ext/openssl (ruby extconf.rb; make; make install)
+  -> /u/apps/forespeak/current/public/
+ - gem install bundler
+
+  
+
+deploying app (as root)
+  - yum install libxml2 libxml2-devel
+  - yum install libxslt-devel
+	- cd /u/apps/forespeak/current
+	- (important!!)  bundle install --deployment --without=test --without=development
 
 
 

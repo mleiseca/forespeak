@@ -56,7 +56,7 @@ group :test do
 end
 
 group :production do
-	gem 'ruby-mysql'
+	gem 'ruby-mysql', '2.9.3'
 end
 
 group :cucumber do
