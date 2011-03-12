@@ -71,4 +71,4 @@ group :cucumber do
 end
 
 
-gem 'newrelic_rpm'
+# gem 'newrelic_rpm'
