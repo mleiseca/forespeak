@@ -21,7 +21,7 @@ production:
   encoding: utf8
   username: deployer
   password: flimflam
-  host: 50-56-92-95.static.cloud-ips.com
+  host: localhost
   pool: 5
   timeout: 5000
 

@@ -18,10 +18,13 @@ cap deploy:check
  -> remote needs:
 		- git
 		- openssl
+		- To fix this, ssh into your server as the user you will deploy with, run ssh git@github.com and confirm the prompt.
 		
 database set up
 
-
+deploying app
+	- (locally) bundle package
+	- 
 
 
 

@@ -5,7 +5,6 @@ gem 'rails', '3.0.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'haml'
 gem 'haml-rails'
@@ -13,7 +12,6 @@ gem 'haml-rails'
 gem 'jquery-rails'
 
 gem 'authlogic'
-gem "declarative_authorization", :git => "git://github.com/stffn/declarative_authorization.git"
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -38,6 +36,7 @@ gem "declarative_authorization", :git => "git://github.com/stffn/declarative_aut
 # end
 
 group :development do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'rspec-rails', '>=2.0.1'
   gem 'annotate-models', '1.0.4'
   gem 'faker', '0.3.1'
