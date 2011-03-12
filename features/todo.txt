@@ -1,6 +1,49 @@
+apache 
+mysql
+ruby 1.9.2 -> built from source
+ 	-> had to upgrade "Development Tools"
+gem update --system
+ 	->ACK! had to install zlib devel headers before building ruby from source
+
+(remote).
+	useradd -g deployer  -d /home/deployer -m deployer
+  create /u/apps
+  chown app to deployer
+  visudo -> remove Defaults    requiretty
+  add local id_dsa.pub to deployer's authorized_keys
+
+locally run cap deploy:setup
+
+cap deploy:check
+ -> remote needs:
+		- git
+		- openssl
+		
+database set up
+
+
+
+
+
 what do other people have???
 what is my total exposure in this market?
 
+	5123.53 	9870.27
+	
+notification system
+ -> lots of activity??
+ -> big price swings
+
+sorting on leaderboard
+
+SLOW
+ -> new relic
+ -> rackspace cloud install?
+
+ticker?
+	- otherwise i have to keep refreshing to see what is going on...
+
+memcached
 
 
 data normalization + machine learning

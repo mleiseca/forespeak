@@ -69,3 +69,6 @@ group :cucumber do
   gem 'spork'
   gem 'launchy'    # So you can do Then show me the page
 end
+
+
+gem 'newrelic_rpm'
