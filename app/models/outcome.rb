@@ -86,6 +86,7 @@ class Outcome < ActiveRecord::Base
     SHARES_AVAILABLE - shares_purchased
   end
   
+  # todo: needs test
   def all_user_positions
     users = User.find( :all, :select => 'DISTINCT users.id ' , :joins => :positions, :conditions => ['positions.outcome_id = ?', id])
     

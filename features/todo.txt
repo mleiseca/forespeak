@@ -35,12 +35,16 @@ deploying app (as root)
   - yum install libxml2 libxml2-devel
   - yum install libxslt-devel
 	- cd /u/apps/forespeak/current
-	- (important!!)  bundle install --deployment --without=test --without=development
+	 If you run the server as ‘app_user’ or whatever you account is, then you should bundle install with the same account, so you dont have permission problems. (http://www.cowboycoded.com/2010/07/07/setting-up-rails-3-on-rackspace-cloud-servers/)
+	- (important!!) bundle --path /home/deployer/gems --deployment  --without=test --without=development
+	
+	
 
-
-  LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-3.0.5/ext/apache2/mod_passenger.so
-  PassengerRoot /usr/local/lib/ruby/gems/1.8/gems/passenger-3.0.5
+  LoadModule passenger_module /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.5/ext/apache2/mod_passenger.so
+  PassengerRoot /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.5
   PassengerRuby /usr/local/bin/ruby
+
+
 
 
   <VirtualHost *:80>
@@ -57,7 +61,7 @@ deploying app (as root)
 what do other people have???
 what is my total exposure in this market?
 
-	5123.53 	9870.27
+make database.yml secure
 	
 notification system
  -> lots of activity??

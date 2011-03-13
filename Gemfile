@@ -38,6 +38,8 @@ gem 'nokogiri'
 # end
 
 group :development do
+	gem 'ruby-mysql', '2.9.3'
+
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'rspec-rails', '>=2.0.1'
   gem 'annotate-models', '1.0.4'
@@ -58,7 +60,7 @@ group :test do
 end
 
 group :production do
-	gem 'mysql'
+	# gem 'mysql'
 end
 
 group :cucumber do

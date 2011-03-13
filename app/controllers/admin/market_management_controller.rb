@@ -22,6 +22,7 @@ class Admin::MarketManagementController < ApplicationController
     end
   end
 
+  # todo: needs test....also should be in outcome, not here
   def close
     outcome = Outcome.find(params[:outcome_id])
     
