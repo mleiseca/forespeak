@@ -44,7 +44,8 @@ group :development do
   gem 'rspec-rails', '>=2.0.1'
   gem 'annotate-models', '1.0.4'
   gem 'faker', '0.3.1'
-	gem "nifty-generators"
+	# gem 'rails3-generators'
+	
 end
 
 

@@ -35,8 +35,9 @@ class Market < ActiveRecord::Base
   validates_associated :outcomes
   
   validates_presence_of :name ,:start_date
-  
-  validates_uniqueness_of :name
+
+  # todo: should this be added back? not sure how to use this with factory girl...
+  # validates_uniqueness_of :name
 
   validates_presence_of :outcomes
   # validates_with OutcomeStartPriceValidator
