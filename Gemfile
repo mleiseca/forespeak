@@ -53,11 +53,11 @@ group :test do
   gem 'rspec'
   gem 'rspec-rails', '>=2.0.1'
   gem 'webrat'
-  gem 'spork'
   gem 'autotest'
   gem "autotest-rails"
   gem 'factory_girl_rails', '1.0'
 	gem "mocha"
+	gem 'spork', '~> 0.9.0.rc'
 end
 
 group :production do
@@ -70,7 +70,7 @@ group :cucumber do
   gem 'cucumber-rails'
   gem 'cucumber'
   gem 'rspec-rails', '>=2.0.1'
-  gem 'spork'
+	gem 'spork', '~> 0.9.0.rc'
   gem 'launchy'    # So you can do Then show me the page
 end
 

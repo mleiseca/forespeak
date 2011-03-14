@@ -9,19 +9,32 @@ class Bookie
   
   B = BigDecimal.new('20')
   
+  def initialize(outcome, all_outcomes)
+    @target_outcome = outcome
+    @all_market_outcomes = all_outcomes
+  end
+  
   # returns a price for the number of shares
-  def buy_cost(all_market_outcomes, target_outcome, number_of_shares)
+  def buy_cost(number_of_shares)
     if (number_of_shares< 0)
       raise ArgumentError, "can't buy fewer than 10 shares"
     end
     
-    return price_calculator(all_market_outcomes, target_outcome, number_of_shares)
+    return price_calculator(number_of_shares)
+  end
+  
+  def sell_cost(number_of_shares)
+    if (number_of_shares< 0)
+      raise ArgumentError, "can't sell fewer than 10 shares"
+    end
+    
+    return -1 * price_calculator(-1 * number_of_shares)
   end
   
   private 
   
   # delta_shares - positive means buy, negative means sell
-  def price_calculator(all_market_outcomes, target_outcome, delta_shares)
+  def price_calculator(delta_shares)
 
     # http://blog.oddhead.com/2006/10/30/implementing-hansons-market-maker/
     #     The market maker keeps track of how many shares have been purchased by traders in total so far for each outcome: 
@@ -45,11 +58,11 @@ class Bookie
 
     sum_of_current_costs = 0
     sum_of_future_costs = 0
-    all_market_outcomes.each do |o|
+    @all_market_outcomes.each do |o|
       current_shares_purchased = [o.shares_purchased, B].max
       future_shares_purchased  = current_shares_purchased
       
-      if o.id == target_outcome.id
+      if o.id == @target_outcome.id
         Rails.logger.info "For found same outcome"
         future_shares_purchased += delta_shares
       end
