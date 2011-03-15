@@ -33,17 +33,15 @@ class MarketsController < ApplicationController
       :total_user_shares => total_shares,
       :direction => :sell,
       :outcome_price => current_price
-      # :outcome_price_post_transaction => determine_new_price(outcome)
     )
 
     if position.save
       logger.info "Created position: " + position.to_s
       current_user.cash = current_user.cash + position.delta_user_account_value
       current_user.save
-      flash[:message] = "Sell successful -- " +
-          (-1 * position.delta_user_shares).truncate(2).to_s + " shares @ $" +
-          position.outcome_price.truncate(2).to_s + " got $" +
-          position.delta_user_account_value.truncate(2).to_s
+      flash[:message] = "Sell successful -- %.2f shares @ $%.2f cost %.2f" % 
+        [-1 * position.delta_user_shares, position.outcome_price, position.delta_user_account_value]
+      
       redirect_to markets_path    
     else
       flash[:error] = position.errors
@@ -91,10 +89,9 @@ class MarketsController < ApplicationController
       logger.info "Created position: " + position.to_s
       current_user.cash = current_user.cash + position.delta_user_account_value
       current_user.save
-      flash[:message] = "Buy successful -- " +
-          position.delta_user_shares.truncate(2).to_s + " shares @ $" +
-          position.outcome_price.truncate(2).to_s + " cost " +
-          (-1 * position.delta_user_account_value).truncate(2).to_s
+      flash[:message] = "Buy successful -- %.2f shares @ $%.2f cost %.2f" % 
+        [position.delta_user_shares, position.outcome_price, -1 * position.delta_user_account_value]
+
       redirect_to markets_path    
     else
       flash[:error] = position.errors
