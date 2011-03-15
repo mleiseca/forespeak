@@ -61,7 +61,7 @@ group :test do
 end
 
 group :production do
-	# gem 'mysql'
+	gem 'mysql'
 end
 
 group :cucumber do

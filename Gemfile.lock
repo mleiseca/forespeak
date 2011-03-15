@@ -96,6 +96,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     mocha (0.9.12)
+    mysql (2.8.1)
     nokogiri (1.4.4)
     polyglot (0.3.1)
     rack (1.2.2)
@@ -172,6 +173,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   mocha
+  mysql
   nokogiri
   rails (= 3.0.1)
   rspec
