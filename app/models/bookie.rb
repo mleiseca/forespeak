@@ -7,7 +7,7 @@ include BigMath
   
 class Bookie
   
-  B = BigDecimal.new('20')
+  B = BigDecimal.new('200')
   
   def initialize(outcome, all_outcomes)
     @target_outcome = outcome
@@ -23,7 +23,7 @@ class Bookie
     return price_calculator(number_of_shares)
   end
   
-  def sell_cost(number_of_shares)
+  def sell_price(number_of_shares)
     if (number_of_shares< 0)
       raise ArgumentError, "can't sell fewer than 10 shares"
     end

@@ -6,13 +6,20 @@ class Outcome < ActiveRecord::Base
   belongs_to :market
  
   SHARES_TO_PURCHASE = 10
-  SHARES_AVAILABLE = 1000
+  SHARES_AVAILABLE = 10000
+  
+  def bookie
+    if ! @bookie 
+      @bookie = Bookie.new(self,market.outcomes)
+    end
+    @bookie
+  end
   
   def sell_price(share_count=nil)
     if share_count.nil?
       share_count = SHARES_TO_PURCHASE
     end
-    return price_calculator(-1 * share_count)
+    return bookie.sell_price(share_count) / share_count
   end
   
   
@@ -20,7 +27,7 @@ class Outcome < ActiveRecord::Base
     if share_count.nil?
       share_count = SHARES_TO_PURCHASE
     end
-    return price_calculator(share_count)
+    return bookie.buy_cost(share_count) / share_count
   end
 
   def shares_purchased

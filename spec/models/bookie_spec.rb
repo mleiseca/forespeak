@@ -50,21 +50,21 @@ describe Bookie do
    
   describe "selling" do
     it "should raise an ArgumentError if trying to sell negative number of shares" do
-      lambda {@bookie.sell_cost(-10)}.should raise_error(ArgumentError)
+      lambda {@bookie.sell_price(-10)}.should raise_error(ArgumentError)
     end 
   
     it "should cost > $0 to buy 1 share" do
-       @bookie.sell_cost(1).should be > 1
+       @bookie.sell_price(1).should be > 1
     end
 
     it "should cost the same to sell 20 shares at once or 10 share 2 times" do
     
-      twenty_share_cost = @bookie.sell_cost(20)
+      twenty_share_cost = @bookie.sell_price(20)
     
       total = 0
       2.times do
         number_of_shares_to_sell = 10
-        total += @bookie.sell_cost( number_of_shares_to_sell) 
+        total += @bookie.sell_price( number_of_shares_to_sell) 
         @outcome1_share_count -= number_of_shares_to_sell
         @outcome1.stub!(:shares_purchased).and_return(@outcome1_share_count)
       end
@@ -73,7 +73,7 @@ describe Bookie do
     end
   
     it "should cost $... to buy 10 shares of outcome 1" do
-      @bookie.sell_cost( 10).should be_within(1).of(60)
+      @bookie.sell_price( 10).should be_within(1).of(60)
     end
   end
   
