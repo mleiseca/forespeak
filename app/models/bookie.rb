@@ -7,7 +7,7 @@ include BigMath
   
 class Bookie
   
-  B = BigDecimal.new('200')
+  B = BigDecimal.new('50')
   
   def initialize(outcome, all_outcomes)
     @target_outcome = outcome
@@ -56,8 +56,8 @@ class Bookie
     # But a larger “b” also means the market has more liquidity or depth, meaning that traders can buy more shares at 
     # or near the current price without causing massive price swings.
 
-    sum_of_current_costs = 0
-    sum_of_future_costs = 0
+    sum_of_current_costs = 100
+    sum_of_future_costs = 100
     @all_market_outcomes.each do |o|
       current_shares_purchased = [o.shares_purchased, B].max
       future_shares_purchased  = current_shares_purchased
