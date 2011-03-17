@@ -1,5 +1,8 @@
 class MarketsController < ApplicationController
   
+  protect_from_forgery :except=>:index
+  
+  
   def index
     @markets = Market.find(:all, :conditions => ['end_date is null'])    
   end

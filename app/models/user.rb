@@ -10,9 +10,9 @@ class User < ActiveRecord::Base
 
   has_many :positions
    
-  named_scope :actors ,       :conditions => ['username != ?', 'admin']
-  named_scope :unconfirmed,   where(:confirmed => false)
-  named_scope :confirmed,     where(:confirmed => true)
+  scope :actors ,       :conditions => ['username != ?', 'admin']
+  scope :unconfirmed,   where(:confirmed => false)
+  scope :confirmed,     where(:confirmed => true)
 
   def role_symbols
     roles.map do |role|

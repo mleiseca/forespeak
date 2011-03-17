@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110309143540) do
+ActiveRecord::Schema.define(:version => 20110317202912) do
 
   create_table "assignments", :force => true do |t|
     t.integer   "user_id"
@@ -78,21 +78,22 @@ ActiveRecord::Schema.define(:version => 20110309143540) do
   create_table "users", :force => true do |t|
     t.string    "username"
     t.string    "email"
-    t.decimal   "cash",               :default => 0.0,   :null => false
+    t.decimal   "cash",                :default => 0.0,   :null => false
     t.timestamp "created_at"
     t.timestamp "updated_at"
-    t.string    "crypted_password",                      :null => false
-    t.string    "password_salt",                         :null => false
-    t.string    "persistence_token",                     :null => false
-    t.integer   "login_count",        :default => 0,     :null => false
-    t.integer   "failed_login_count", :default => 0,     :null => false
+    t.string    "crypted_password",                       :null => false
+    t.string    "password_salt",                          :null => false
+    t.string    "persistence_token",                      :null => false
+    t.integer   "login_count",         :default => 0,     :null => false
+    t.integer   "failed_login_count",  :default => 0,     :null => false
     t.timestamp "last_request_at"
     t.timestamp "current_login_at"
     t.timestamp "last_login_at"
     t.string    "current_login_ip"
     t.string    "last_login_ip"
     t.boolean   "admin"
-    t.boolean   "confirmed",          :default => false
+    t.boolean   "confirmed",           :default => false
+    t.string    "single_access_token"
   end
 
 end
