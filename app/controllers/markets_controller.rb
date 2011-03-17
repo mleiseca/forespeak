@@ -6,6 +6,11 @@ class MarketsController < ApplicationController
   def index
     @markets = Market.find(:all, :conditions => ['end_date is null'])    
   end
+  
+  def show
+    @market = Market.find(params[:id])
+    
+  end
 
   def sell
     outcome_id = params[:outcome_id]
@@ -45,11 +50,11 @@ class MarketsController < ApplicationController
       flash[:message] = "Sell successful -- %.2f shares @ $%.2f cost %.2f" % 
         [-1 * position.delta_user_shares, position.outcome_price, position.delta_user_account_value]
       
-      redirect_to markets_path    
+      redirect_to outcome.market
     else
       flash[:error] = position.errors
       
-      redirect_to markets_path    
+      redirect_to outcome.market    
     end
   end
   
@@ -95,10 +100,11 @@ class MarketsController < ApplicationController
       flash[:message] = "Buy successful -- %.2f shares @ $%.2f cost %.2f" % 
         [position.delta_user_shares, position.outcome_price, -1 * position.delta_user_account_value]
 
-      redirect_to markets_path    
+        redirect_to outcome.market
     else
       flash[:error] = position.errors
-      redirect_to markets_path    
+      
+      redirect_to outcome.market
     end
     
   end

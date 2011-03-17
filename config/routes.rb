@@ -13,7 +13,7 @@ Forespeak::Application.routes.draw do
   match 'logout', :controller => 'user_sessions', :action => 'destroy', :as => :logout
 
   resources :users
-  match '/markets' => 'markets#index'
+  resources :markets
   
   match '/resupply' => 'users#resupply'
 

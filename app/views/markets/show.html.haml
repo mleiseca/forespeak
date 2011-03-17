@@ -1,0 +1,78 @@
+- if ! current_user.nil?
+  .span-24#user_summary
+    .span-4#username
+      = current_user.username
+    .span-20.last#usercash
+      - if  ! current_user.admin
+        You have $
+        = "%0.2f" % current_user.cash
+
+
+#market-name
+  = @market.name
+#market-start
+  Market Start Date:
+  = @market.start_date
+.span-24.last
+  %table.outcome
+    %th Outcomes
+    %th Sell Price
+    %th Buy Price
+    - if ! current_user.nil?                
+      %th Shares Owned
+      
+    %th Total Shares Held
+    %th
+    
+    - @market.outcomes.each do |outcome|
+      - sell_price = outcome.sell_price
+      - buy_price = outcome.buy_price
+      %tr
+        %td= outcome.description
+        %td= "%0.4f" % sell_price
+        %td= "%0.4f" % buy_price
+        - if ! current_user.nil?                
+          - p = outcome.position_for_user(current_user)
+          %td 
+            - if !p.nil?
+              = p.total_user_shares
+        %td
+          = outcome.shares_purchased 
+        %td 
+
+          - if ! current_user.nil? && ! current_user.admin
+            %div.transaction_form
+              - if !p.nil? && p.total_user_shares > 0
+                = form_tag :controller => "markets", :action => "sell", :method => "post" do
+                  = number_field_tag :sell_share_count, [10,p.total_user_shares].min.to_i, :in => 10..p.total_user_shares, :step => 10
+                  = hidden_field_tag :outcome_id, outcome.id
+                  = submit_tag "Sell", :disable_with => "Selling ...", :class => "sell-button"
+                  :javascript
+                    $('input[name="outcome_id"][value="#{outcome.id}"]').siblings('#sell_share_count').bind('keyup mouseup change', function() {
+                      var v = $(this).val(), max = #{p.total_user_shares};
+                      console.log("sell v = " + v);
+                      if(v < 0) { $(this).val(0); return; }
+                      if(v > max) { $(this).val(max); return; }
+                      $(this).siblings('.sell-button').attr('value',
+                      'Sell ' + v + ' shares $' + ($(this).val() * #{"%0.2f" % (sell_price)}).toFixed(2));
+                    });
+                    $(document).ready(function() {
+                      $('input[name="outcome_id"][value="#{outcome.id}"]').siblings('#sell_share_count').change();
+                    });
+              = form_tag :controller => "markets", :action => "buy", :method => "post" do
+                = number_field_tag :buy_share_count, 10, :in => 10..100, :step => 10
+                = hidden_field_tag :outcome_id, outcome.id
+                = submit_tag "Buy", :disable_with => "Buying ...", :class => "buy-button"
+                :javascript
+                  $('input[name="outcome_id"][value="#{outcome.id}"]').siblings('#buy_share_count').bind('keyup mouseup change', function() {
+                    var v = $(this).val(), max = #{[outcome.shares_available,(current_user.cash / buy_price).truncate].min};
+                    console.log("buy v = " + v);
+                    if(v < 0) { $(this).val(0); return; }
+                    if(v > max) { $(this).val(max); return; }
+                    $(this).siblings('.buy-button').attr('value',
+                    'Buy ' + v + ' shares $' + ($(this).val() * #{"%0.2f" % (outcome.buy_price)}).toFixed(2));
+                  });
+                  $(document).ready(function() {
+                    $('input[name="outcome_id"][value="#{outcome.id}"]').siblings('#buy_share_count').change();
+                  });
+          
