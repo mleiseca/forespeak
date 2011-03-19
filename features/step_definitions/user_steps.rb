@@ -17,7 +17,12 @@ Given /^I have a confirmed account$/ do
 end
 
 Given /^I am logged in as a trader$/ do
-  Given "I have a confirmed account"
+  @user = Factory.create(:trader)
+  Given "I log in"
+end
+
+Given /^I am logged in as an admin$/ do
+  @user = Factory.create(:admin)
   Given "I log in"
 end
 
