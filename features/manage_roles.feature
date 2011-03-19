@@ -1,13 +1,13 @@
-Feature: Manage roles
-  In order to [goal]
-  [stakeholder]
-  wants [behaviour]
-  
-  Scenario: Register new role
-    Given I am on the new role page
-    When I fill in "Name" with "name 1"
-    And I press "Save"
-    Then I should see "name 1"
+# Feature: Manage roles
+#   In order to [goal]
+#   [stakeholder]
+#   wants [behaviour]
+#   
+#   Scenario: Register new role
+#     Given I am on the new role page
+#     When I fill in "Name" with "name 1"
+#     And I press "Save"
+#     Then I should see "name 1"
 
   # Rails generates Delete links that use Javascript to pop up a confirmation
   # dialog and then do a HTTP POST request (emulated DELETE request).
