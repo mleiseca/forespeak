@@ -22,6 +22,8 @@ module NavigationHelpers
  
     when /new market page/
       new_market_management_path
+    when /the login page/
+      login_path
       
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

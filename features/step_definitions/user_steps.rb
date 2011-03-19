@@ -15,6 +15,26 @@ Given /^I have users named (.+?)(?: with (.+))?$/ do |usernames,cash_amounts|
 end
 
 
+Given /^I have a confirmed account$/ do
+  @user = Factory.create(:trader)
+end
+
+Given /^I am logged in as a trader$/ do
+  Given "I have a confirmed account"
+  Given "I log in"
+end
+
+Given /^I log in$/ do
+  
+  # todo: should probably assert that @user is defined
+  visit('login')
+  fill_in('Username', :with => @user.username)
+  fill_in('Password', :with => @user.password)
+  click_button('Create User session')
+end
+
+
+
 # Given /^I have articles titled (.+)$/ do |titles|
 #   titles.split(', ').each do |title|
 #     Article.create(:title => title)

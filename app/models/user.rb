@@ -36,8 +36,6 @@ class User < ActiveRecord::Base
       end      
     end
 
-    
     total
-    
   end
 end
