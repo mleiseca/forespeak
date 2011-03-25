@@ -41,7 +41,7 @@ group :development do
 	gem 'ruby-mysql', '2.9.3'
 
   gem 'sqlite3-ruby', :require => 'sqlite3'
-  gem 'rspec-rails', '>=2.0.1'
+  gem 'rspec-rails'
   gem 'annotate-models', '1.0.4'
   gem 'faker', '0.3.1'
 	# gem 'rails3-generators'
@@ -51,7 +51,7 @@ end
 
 group :test do
   gem 'rspec'
-  gem 'rspec-rails', '>=2.0.1'
+  gem 'rspec-rails'
   gem 'webrat'
   gem 'autotest'
   gem "autotest-rails"
@@ -69,7 +69,7 @@ group :cucumber do
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
-  gem 'rspec-rails', '>=2.0.1'
+  gem 'rspec-rails'
 	gem 'spork', '~> 0.9.0.rc'
   gem 'launchy'    # So you can do Then show me the page
 end
