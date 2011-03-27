@@ -1,62 +1,12 @@
-apache 
-mysql
-ruby 1.9.2 -> built from source
- 	-> had to upgrade "Development Tools"
-ruby gems
-gem update --system
- 	->ACK! had to install zlib devel headers before building ruby from source
-
-(remote).
-	useradd -g deployer  -d /home/deployer -m deployer
-  create /u/apps
-  chown app to deployer
-  visudo -> remove Defaults    requiretty
-  add local id_dsa.pub to deployer's authorized_keys
-
-locally run cap deploy:setup
-
-cap deploy:check
- -> remote needs:
-		- git
-		- openssl
-		- To fix this, ssh into your server as the user you will deploy with, run ssh git@github.com and confirm the prompt.
-		
-database set up
-
-(remote) set up apache+passenger
- - gem install passenger
- - /sources/ruby-1.9.2-p180/ext/openssl (ruby extconf.rb; make; make install)
-  -> /u/apps/forespeak/current/public/
- - gem install bundler
-
-  
-
-deploying app (as root)
-  - yum install libxml2 libxml2-devel
-  - yum install libxslt-devel
-	- cd /u/apps/forespeak/current
-	 If you run the server as ‘app_user’ or whatever you account is, then you should bundle install with the same account, so you dont have permission problems. (http://www.cowboycoded.com/2010/07/07/setting-up-rails-3-on-rackspace-cloud-servers/)
-	- (important!!) bundle --path /home/deployer/gems --deployment  --without=test --without=development
-	
-	
-
-  LoadModule passenger_module /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.5/ext/apache2/mod_passenger.so
-  PassengerRoot /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.5
-  PassengerRuby /usr/local/bin/ruby
-
-
-
-
-  <VirtualHost *:80>
-     ServerName www.yourhost.com
-     DocumentRoot /somewhere/public    # <-- be sure to point to 'public'!
-     <Directory /somewhere/public>
-        AllowOverride all              # <-- relax Apache security settings
-        Options -MultiViews            # <-- MultiViews must be turned off
-     </Directory>
-  </VirtualHost>
-
-
+last n minutes activity, last 2 days
+ -> high low, quartiles
+ 
+list transactions as you sit on the page
+ -> give me transactions since...transaction id
+ -> polling every 5 seconds?
+ 
+jquery ui?
+ 
 
 what do other people have???
 what is my total exposure in this market?
