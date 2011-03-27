@@ -9,9 +9,18 @@ class Bookie
   
   B = BigDecimal.new('50')
   
-  def initialize(outcome, all_outcomes)
+  def initialize(outcome)
     @target_outcome = outcome
-    @all_market_outcomes = all_outcomes
+  end
+  
+  
+  # memcached
+  def data_cache(key)
+    unless output = Rails.cache.read(key)
+      output = yield
+      Rails.cache.write(key, output)
+    end
+    return output
   end
   
   # returns a price for the number of shares
@@ -20,7 +29,7 @@ class Bookie
       raise ArgumentError, "can't buy fewer than 10 shares"
     end
     
-    return price_calculator(number_of_shares)
+    return data_cache("buy outcome: #{@target_outcome.id} count: #{number_of_shares}") { price_calculator(number_of_shares) }
   end
   
   def sell_price(number_of_shares)
@@ -28,7 +37,8 @@ class Bookie
       raise ArgumentError, "can't sell fewer than 10 shares"
     end
     
-    return -1 * price_calculator(-1 * number_of_shares)
+    return data_cache("sell outcome: #{@target_outcome.id} count: #{number_of_shares}") { -1 * price_calculator(-1 * number_of_shares) }
+    
   end
   
   private 
@@ -56,9 +66,10 @@ class Bookie
     # But a larger “b” also means the market has more liquidity or depth, meaning that traders can buy more shares at 
     # or near the current price without causing massive price swings.
 
+    Rails.logger.info("Recalculating prices for #{@target_outcome.id}")
     sum_of_current_costs = 100
     sum_of_future_costs = 100
-    @all_market_outcomes.each do |o|
+    @target_outcome.market.outcomes.each do |o|
       current_shares_purchased = [o.shares_purchased, B].max
       future_shares_purchased  = current_shares_purchased
       

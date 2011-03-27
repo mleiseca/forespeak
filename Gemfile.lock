@@ -96,6 +96,8 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcache-client (1.8.5)
+    memcached (1.2.3)
     mime-types (1.16)
     mocha (0.9.12)
     mysql (2.8.1)
@@ -174,6 +176,8 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   launchy
+  memcache-client
+  memcached
   mocha
   mysql
   nokogiri

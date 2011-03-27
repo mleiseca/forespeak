@@ -10,7 +10,7 @@ class Outcome < ActiveRecord::Base
   
   def bookie
     if ! @bookie 
-      @bookie = Bookie.new(self,market.outcomes)
+      @bookie = Bookie.new(self)
     end
     @bookie
   end

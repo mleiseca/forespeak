@@ -13,6 +13,9 @@ gem 'jquery-rails'
 
 gem 'authlogic'
 
+gem 'memcached'
+gem 'memcache-client'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

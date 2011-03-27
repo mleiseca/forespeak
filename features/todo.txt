@@ -1,9 +1,26 @@
+
+make sure that caches get invalidated on buy/sell
+
+as you sit on the page
+  give me up to date prices
+  list transactions 
+   -> give me transactions since...transaction id
+   -> polling every 5 seconds?
+   -> http://railscasts.com/episodes/205-unobtrusive-javascript
+   -> http://railscasts.com/episodes/37-simple-search-form
+
+change market show and sell 
+  to not use tables (so that fragment is not so hideous)
+  routing to look like: 
+    /outcome/:id/sell
+    /outcome/:id/buy
+
+
+
+
 last n minutes activity, last 2 days
  -> high low, quartiles
  
-list transactions as you sit on the page
- -> give me transactions since...transaction id
- -> polling every 5 seconds?
  
 jquery ui?
  
@@ -18,6 +35,9 @@ notification system
  -> big price swings
 
 sorting on leaderboard
+
+# sudo launchctl load -w /Library/LaunchDaemons/org.macports.memcached.plist
+
 
 SLOW
  -> new relic

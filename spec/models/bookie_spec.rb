@@ -14,7 +14,11 @@ describe Bookie do
     
     @all_outcomes = [@outcome1, @outcome2]
     
-    @bookie = Bookie.new(@outcome1, @all_outcomes)
+    
+    market = mock('market')
+    market.stub!(:outcomes, @all_outcomes)
+    
+    @bookie = Bookie.new(@outcome1)
     
   end
 
