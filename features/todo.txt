@@ -1,5 +1,4 @@
 
-make sure that caches get invalidated on buy/sell
 
 as you sit on the page
   give me up to date prices

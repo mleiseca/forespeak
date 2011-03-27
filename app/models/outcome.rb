@@ -44,21 +44,26 @@ class Outcome < ActiveRecord::Base
   def shares_available
     SHARES_AVAILABLE - shares_purchased
   end
+
   
   # todo: needs test
   def all_user_positions
-    users = User.find( :all, :select => 'DISTINCT users.id ' , :joins => :positions, :conditions => ['positions.outcome_id = ?', id])
     
-    positions = []
-    users.each do |user| 
-      positions.push position_for_user(user)
-    end
+    # note: this caching is a big performance saver
+    Rails.cache.fetch("p_o#{id}_all_ts#{market.last_transaction_date}") do
+      users = User.find( :all, :select => 'DISTINCT users.id ' , :joins => :positions, :conditions => ['positions.outcome_id = ?', id])
+    
+      positions = []
+      users.each do |user| 
+        positions.push position_for_user(user)
+      end
 
-    positions
+      positions
+    end
   end
   
   
   def position_for_user(user)
-    position = Position.last(:conditions => ["outcome_id = ? and user_id = ?", id, user.id])
+    Position.last(:conditions => ["outcome_id = ? and user_id = ?", id, user.id])
   end
 end
