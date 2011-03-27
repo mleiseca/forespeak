@@ -16,6 +16,8 @@ gem 'authlogic'
 gem 'memcached'
 gem 'memcache-client'
 
+gem 'delayed_job'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

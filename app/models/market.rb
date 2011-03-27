@@ -18,7 +18,14 @@ class OutcomeValidator < ActiveModel::Validator
   end
 end
 
-
+def cache_numbers
+  logger.info("recalcing market #{id}")
+  outcomes.each do |o|
+    o.all_user_positions
+    o.buy_price
+    o.sell_price
+  end
+end
 
 class Market < ActiveRecord::Base
   has_many :outcomes
@@ -34,4 +41,10 @@ class Market < ActiveRecord::Base
   
   
   accepts_nested_attributes_for :outcomes, :reject_if => lambda { |a| a[:description].blank? }
+  
+  def had_sale
+    self.last_transaction_date = DateTime.now
+    
+    self.delay.cache_numbers    
+  end
 end

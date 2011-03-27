@@ -51,9 +51,9 @@ class MarketsController < ApplicationController
 
       clear_caches(outcome)
       
-      # todo: this doesn't belong here...
-      outcome.market.last_transaction_date = DateTime.now
+      outcome.market.had_sale
       outcome.market.save
+      
       
       redirect_to outcome.market
     else
@@ -106,8 +106,7 @@ class MarketsController < ApplicationController
       flash[:message] = "Buy successful -- %.2f shares @ $%.2f cost %.2f" % 
         [position.delta_user_shares, position.outcome_price, -1 * position.delta_user_account_value]
 
-        # todo: this doesn't belong here...
-        outcome.market.last_transaction_date = DateTime.now
+        outcome.market.had_sale
         outcome.market.save
         
         clear_caches(outcome)
@@ -129,7 +128,5 @@ class MarketsController < ApplicationController
       :id=>outcome.market.id, 
       :fragment => "market_#{outcome.market.id}_outcomes")
 
-    # todo: problem: ActiveSupport::Cache::MemCacheStore does not support delete_matched
-    # expire_fragment(%r{market_#{outcome.market.id}_.*})
   end
 end

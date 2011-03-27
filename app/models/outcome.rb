@@ -1,3 +1,5 @@
+require_dependency 'position'
+
 class Outcome < ActiveRecord::Base
   validates_presence_of :description
   # validates_numericality_of :start_price
@@ -64,6 +66,8 @@ class Outcome < ActiveRecord::Base
   
   
   def position_for_user(user)
-    Position.last(:conditions => ["outcome_id = ? and user_id = ?", id, user.id])
+    Rails.cache.fetch("p_o#{id}_u#{user.id}_ts#{market.last_transaction_date}") do
+      Position.last(:conditions => ["outcome_id = ? and user_id = ?", id, user.id])
+    end
   end
 end
