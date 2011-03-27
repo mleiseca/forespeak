@@ -14,11 +14,11 @@ class Bookie
   end
   
   
-  # memcached
+  # todo: this doesn't belong here....
   def data_cache(key)
     unless output = Rails.cache.read(key)
       output = yield
-      Rails.cache.write(key, output)
+      Rails.cache.write(key, output, :expires_in => 15.minutes)
     end
     return output
   end
@@ -29,7 +29,7 @@ class Bookie
       raise ArgumentError, "can't buy fewer than 10 shares"
     end
     
-    return data_cache("buy outcome: #{@target_outcome.id} count: #{number_of_shares}") { price_calculator(number_of_shares) }
+    return data_cache("buy_o#{@target_outcome.id}_c#{number_of_shares}_ts#{@target_outcome.market.last_transaction_date}") { price_calculator(number_of_shares) }
   end
   
   def sell_price(number_of_shares)
@@ -37,7 +37,7 @@ class Bookie
       raise ArgumentError, "can't sell fewer than 10 shares"
     end
     
-    return data_cache("sell outcome: #{@target_outcome.id} count: #{number_of_shares}") { -1 * price_calculator(-1 * number_of_shares) }
+    return data_cache("sell_o#{@target_outcome.id}_c#{number_of_shares}_ts#{@target_outcome.market.last_transaction_date}") { -1 * price_calculator(-1 * number_of_shares) }
     
   end
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110317202912) do
+ActiveRecord::Schema.define(:version => 20110327185031) do
 
   create_table "assignments", :force => true do |t|
     t.integer   "user_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20110317202912) do
     t.date      "end_date"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.datetime  "last_transaction_date"
   end
 
   create_table "outcomes", :force => true do |t|
