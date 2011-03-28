@@ -10,20 +10,19 @@
 
 #market-name
   = @market.name
-#market-start
-  Market Start Date:
-  = @market.start_date
-.span-24.last
-  %table.outcome
-    %th Outcomes
-    %th Sell Price
-    %th Buy Price
-    - if ! current_user.nil?                
-      %th Shares Owned
-      
-    %th Total Shares Held
-    %th
 
-    / - cache(:fragment => "market_#{@market.id}_outcomes") do
-    = render @market.outcomes
+#market_display
+  =render @market
+    
+:javascript
+  $(document).ready( function(){ 
+    setInterval(function(){ 
+      $.ajax({
+        url: "/markets/#{@market.id}.js", 
+        dataType: 'script',
+        cache: true
+      });
+    }, 3000);
+  })
+
       

@@ -9,6 +9,9 @@ class MarketsController < ApplicationController
   
   def show
     @market = Market.find(params[:id])
+    if @market.last_transaction_date
+      fresh_when :last_modified => @market.last_transaction_date.utc, :etag => @market
+    end
   end
 
   def sell
@@ -53,7 +56,6 @@ class MarketsController < ApplicationController
       
       outcome.market.had_sale
       outcome.market.save
-      
       
       redirect_to outcome.market
     else
@@ -122,6 +124,8 @@ class MarketsController < ApplicationController
   private 
   
   def clear_caches(outcome)
+    # todo: this should be a sweeper on Position creation instead of a method
+    #  see: http://guides.rubyonrails.org/caching_with_rails.html#sweepers
     expire_fragment(
       :controller => "markets", 
       :action => "show", 

@@ -1,7 +1,12 @@
 
+only reload section if content has changed (http headers?)
+dont reload if user is interacting with text box? dan??
+
+
 buy: Completed 200 OK in 548ms (Views: 385.0ms | ActiveRecord: 16.6ms)
 reload: Completed 200 OK in 725ms (Views: 288.4ms | ActiveRecord: 7.5ms)
-reload with fragment: Completed 200 OK in 403ms (Views: 189.8ms | ActiveRecord: 4.3ms)
+2nd reload: Completed 200 OK in 403ms (Views: 189.8ms | ActiveRecord: 4.3ms)
+reload with fragment??: 
 
 
 reload: Completed 200 OK in 1789ms (Views: 1296.5ms | ActiveRecord: 76.9ms)

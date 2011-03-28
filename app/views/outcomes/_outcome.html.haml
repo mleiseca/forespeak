@@ -24,7 +24,6 @@
             :javascript
               $('input[name="outcome_id"][value="#{outcome.id}"]').siblings('#sell_share_count').bind('keyup mouseup change', function() {
                 var v = $(this).val(), max = #{p.total_user_shares};
-                console.log("sell v = " + v);
                 if(v < 0) { $(this).val(0); return; }
                 if(v > max) { $(this).val(max); return; }
                 $(this).siblings('.sell-button').attr('value',
@@ -40,7 +39,6 @@
           :javascript
             $('input[name="outcome_id"][value="#{outcome.id}"]').siblings('#buy_share_count').bind('keyup mouseup change', function() {
               var v = $(this).val(), max = #{[outcome.shares_available,(current_user.cash / buy_price).truncate].min};
-              console.log("buy v = " + v);
               if(v < 0) { $(this).val(0); return; }
               if(v > max) { $(this).val(max); return; }
               $(this).siblings('.buy-button').attr('value',
