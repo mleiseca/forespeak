@@ -36,4 +36,5 @@ class Position < ActiveRecord::Base
   
   
   # validates_inclusion_of :type, :in => %w(buy sell)
+  
 end

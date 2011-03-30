@@ -27,7 +27,7 @@ change market show and sell
     /outcome/:id/buy
 
 
-
+sweeper instead of marketcontroller for cache expires
 
 last n minutes activity, last 2 days
  -> high low, quartiles

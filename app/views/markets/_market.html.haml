@@ -1,16 +1,16 @@
 #market-date
   As of:
   = DateTime.now.strftime("%m/%d/%Y %H:%M:%S")  
-.span-24.last
-  %table.outcome
-    %th Outcomes
-    %th Sell Price
-    %th Buy Price
-    - if ! current_user.nil?                
-      %th Shares Owned
-    
-    %th Total Shares Held
-    %th
-
+.span-24.last#outcomes
+  .span-24.last#outcomes-header
+    .span-4 
+      &nbsp;
+    .span-4
+      Outcome
+    .span-4 
+      Prices
+    .span-12.last
+      Owned
+  .span-24.last#outcomes-body
     - cache(:fragment => "market_#{@market.id}_outcomes") do
       = render @market.outcomes

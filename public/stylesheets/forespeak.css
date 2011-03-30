@@ -75,3 +75,12 @@ body {
 .transaction_form input[type='number']{
     width: 50px;
 }
+
+/*.outcomes-body*/
+
+#outcomes{
+    margin-top: 10px;
+}
+.outcome {
+    margin-top: 20px;
+}
