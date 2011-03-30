@@ -1,3 +1,5 @@
+need to honor an "last_trade_allowed_date"
+
 
 only reload section if content has changed (http headers?)
 dont reload if user is interacting with text box? dan??

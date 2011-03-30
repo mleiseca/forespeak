@@ -13,6 +13,30 @@ class MarketsController < ApplicationController
       fresh_when :last_modified => @market.last_transaction_date.utc, :etag => @market
     end
   end
+  
+  def updates
+    @market = Market.find(params[:id])
+    client_recent_position = Position.find(params[:position_id])
+        
+    if @market.position and (@market.position == client_recent_position)
+      head :not_modified 
+      return
+    end
+
+    
+    @positions = Position.more_recent_positions_for_market(client_recent_position)
+    activity = @positions.map{|p| {:id => p.id,:user=>p.user.username, :volume => p.delta_user_shares}}
+    
+    prices = @market.outcomes.map{|o| {:id => o.id, :sell_price=>o.sell_price, :buy_price=>o.buy_price} }
+    render :json => {
+      :activity => activity ,
+      :current_outcomes   => prices
+    }
+      
+    if @market.last_transaction_date
+      fresh_when(:last_modified => @market.last_transaction_date.utc, :etag => @market.position)
+    end
+  end
 
   def sell
     outcome_id = params[:outcome_id]
@@ -54,7 +78,7 @@ class MarketsController < ApplicationController
 
       clear_caches(outcome)
       
-      outcome.market.had_sale
+      outcome.market.had_sale(position)
       outcome.market.save
       
       redirect_to outcome.market
@@ -108,7 +132,7 @@ class MarketsController < ApplicationController
       flash[:message] = "Buy successful -- %.2f shares @ $%.2f cost %.2f" % 
         [position.delta_user_shares, position.outcome_price, -1 * position.delta_user_account_value]
 
-        outcome.market.had_sale
+        outcome.market.had_sale(position)
         outcome.market.save
         
         clear_caches(outcome)

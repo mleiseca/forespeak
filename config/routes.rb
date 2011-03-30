@@ -20,6 +20,8 @@ Forespeak::Application.routes.draw do
   match '/buy' => 'markets#buy'
   match '/sell' => 'markets#sell'
   
+  match '/markets/:id/updates/:position_id' => 'markets#updates'
+  
   resources :market_management, :module => 'admin', :path => "/admin/markets"
   match '/admin/markets/close' => 'admin/market_management#close'
 

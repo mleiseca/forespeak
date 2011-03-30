@@ -10,6 +10,14 @@ class Outcome < ActiveRecord::Base
   SHARES_TO_PURCHASE = 10
   SHARES_AVAILABLE = 10000
   
+  # def to_json(options = {})
+  #   { 
+  #     :id => id,
+  #     :buy_price => self.buy_price,
+  #     :sell_price => self.sell_price
+  #   }
+  # end
+  
   def bookie
     if ! @bookie 
       @bookie = Bookie.new(self)

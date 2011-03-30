@@ -43,5 +43,7 @@ module Forespeak
       g.template_engine :haml
     end
     
+    ActiveRecord::Base.include_root_in_json = false
+    
   end
 end

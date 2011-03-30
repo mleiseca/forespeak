@@ -16,12 +16,18 @@
     
 :javascript
   $(document).ready( function(){ 
-    setInterval(function(){ 
-      $.ajax({
-        url: "/markets/#{@market.id}.js", 
-        dataType: 'script',
-        cache: true
-      });
+      setInterval(function(){ 
+        $.ajax({
+          url: '/markets/#{@market.id}/updates/#{@market.position.id}.json',
+          dataType: 'json',
+          ifModified: true,
+          cache: true,
+          success: function(data, f, b) {
+            if (f != "notmodified"){
+              alert("JSON Data: " + f);  
+            }
+          }
+        })
     }, 3000);
   });
 

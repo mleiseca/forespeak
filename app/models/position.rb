@@ -37,4 +37,11 @@ class Position < ActiveRecord::Base
   
   # validates_inclusion_of :type, :in => %w(buy sell)
   
+  def self.more_recent_positions_for_market(position)
+    Position.joins(:outcome).
+      where("positions.id > :current_id", {:current_id => position.id}).
+      where(:outcomes => {:market_id => position.outcome.market.id}).
+      order("positions.id asc")
+  end
+  
 end

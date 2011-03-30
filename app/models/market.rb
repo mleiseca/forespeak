@@ -29,6 +29,8 @@ end
 
 class Market < ActiveRecord::Base
   has_many :outcomes
+  belongs_to :position, :foreign_key => 'last_transaction_position_id'
+  
   validates_associated :outcomes
   
   validates_presence_of :name ,:start_date
@@ -41,9 +43,16 @@ class Market < ActiveRecord::Base
   
   
   accepts_nested_attributes_for :outcomes, :reject_if => lambda { |a| a[:description].blank? }
-  
-  def had_sale
-    self.last_transaction_date = DateTime.now
+
+  def last_transaction_date
+    if self.position 
+      self.position.created_at
+    else
+      nil
+    end
+  end
+  def had_sale(position)
+    self.position = position
     
     self.delay.cache_numbers    
   end
