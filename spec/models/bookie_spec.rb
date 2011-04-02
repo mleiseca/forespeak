@@ -17,6 +17,10 @@ describe Bookie do
     
     market = mock('market')
     market.stub!(:outcomes, @all_outcomes)
+    market.stub!(:last_transaction_date, Date.now)
+    
+    @outcome1.stub!(:market).and_return(market)
+    @outcome2.stub!(:market).and_return(market)
     
     @bookie = Bookie.new(@outcome1)
     
