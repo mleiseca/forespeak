@@ -6,9 +6,7 @@ require "bigdecimal/math"
 include BigMath
   
 class Bookie
-  
-  B = BigDecimal.new('50')
-  
+    
   def initialize(outcome)
     @target_outcome = outcome
   end
@@ -57,10 +55,14 @@ class Bookie
     # or near the current price without causing massive price swings.
 
     Rails.logger.info("Recalculating prices for #{@target_outcome.id}")
-    sum_of_current_costs = 100
-    sum_of_future_costs = 100
-    @target_outcome.market.outcomes.each do |o|
-      current_shares_purchased = [o.shares_purchased, B].max
+    
+    current_shares_amounts = []
+    future_shares_amounts   = []
+     
+    Rails.logger.info "Aggregating market outcomes"
+    
+    @target_outcome.market_outcomes.each do |o|
+      current_shares_purchased = o.shares_purchased
       future_shares_purchased  = current_shares_purchased
       
       if o.id == @target_outcome.id
@@ -68,14 +70,35 @@ class Bookie
         future_shares_purchased += delta_shares
       end
           
-      sum_of_current_costs += BigMath.exp(BigDecimal.new(current_shares_purchased.to_s) / B, 10)
-      sum_of_future_costs  += BigMath.exp(BigDecimal.new(future_shares_purchased.to_s) / B, 10)
+      current_shares_amounts.push(current_shares_purchased)
+      future_shares_amounts.push(future_shares_purchased)
     end
+
+    Rails.logger.info "Summing market outcomes"
     
-    future_cost  = (B * Math.log(sum_of_future_costs))
-    current_cost = (B * Math.log(sum_of_current_costs))
+    sum_of_current_amounts = current_shares_amounts.inject(0){|sum, x| x+sum}
+    sum_of_future_amounts  = future_shares_amounts.inject(0){|sum, x | x+sum}
+
+    b_tmp = [[sum_of_current_amounts, sum_of_future_amounts].min, 16].max
+    
+    b = BigDecimal.new(Math.sqrt(b_tmp).to_s)
+      
+    Rails.logger.info "***** b: #{b} (#{sum_of_current_amounts},  #{sum_of_future_amounts})"
+
+    calc_current_costs = current_shares_amounts.inject(100.0){| sum, x| sum + BigMath.exp(BigDecimal.new(x.to_s) / b, 10)}
+    calc_future_costs = future_shares_amounts.inject(100.0){|sum, x| sum + BigMath.exp(BigDecimal.new(x.to_s) / b, 10)}
+
+    
+    future_cost  = (b * Math.log(calc_future_costs))
+    current_cost = (b * Math.log(calc_current_costs))
     cost = future_cost - current_cost
-    Rails.logger.info "Found cost: #{future_cost} (#{sum_of_future_costs}) - #{current_cost} (#{sum_of_current_costs}) = #{cost}"
+    
+    if delta_shares > 0
+      cost *= 1.07
+    else
+      cost *= 0.93    
+    end
+    # Rails.logger.info "Found cost: #{future_cost} (#{sum_of_future_costs}) - #{current_cost} (#{sum_of_current_costs}) = #{cost}"
     
     cost * 100
   end

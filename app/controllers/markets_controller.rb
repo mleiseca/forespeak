@@ -9,6 +9,9 @@ class MarketsController < ApplicationController
   
   def show
     @market = Market.find(params[:id])
+    @latest_position_id = ''
+    @latest_position_id = @market.position.id if @market.position
+    
     # if @market.last_transaction_date
     #      fresh_when :last_modified => @market.last_transaction_date.utc, :etag => @market
     #    end

@@ -13,14 +13,15 @@ describe Bookie do
     @outcome2.stub!(:id).and_return(2)
     
     @all_outcomes = [@outcome1, @outcome2]
-    
-    
+        
+    @outcome1.stub!(:market_outcomes).and_return(@all_outcomes)
+    @outcome2.stub!(:market_outcomes).and_return(@all_outcomes)
+
     market = mock('market')
-    market.stub!(:outcomes, @all_outcomes)
-    market.stub!(:last_transaction_date, Date.now)
-    
+    market.stub!(:last_transaction_date, Time.now)
     @outcome1.stub!(:market).and_return(market)
     @outcome2.stub!(:market).and_return(market)
+    
     
     @bookie = Bookie.new(@outcome1)
     
@@ -51,7 +52,7 @@ describe Bookie do
     end
   
     it "should cost $... to buy 10 shares of outcome 1" do
-      @bookie.buy_cost( 10).should be_within(1).of(96)
+      @bookie.buy_cost( 10).should be_within(1).of(27)
     end
   end
   
@@ -81,7 +82,7 @@ describe Bookie do
     end
   
     it "should cost $... to buy 10 shares of outcome 1" do
-      @bookie.sell_price( 10).should be_within(1).of(60)
+      @bookie.sell_price( 10).should be_within(1).of(22)
     end
   end
   

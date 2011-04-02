@@ -7,7 +7,7 @@ class Outcome < ActiveRecord::Base
   has_many :positions
   belongs_to :market
  
-  SHARES_TO_PURCHASE = 10
+  SHARES_TO_PURCHASE = 1
   SHARES_AVAILABLE = 10000
   
   # def to_json(options = {})
@@ -32,6 +32,10 @@ class Outcome < ActiveRecord::Base
     return bookie.sell_price(share_count) / share_count
   end
   
+  
+  def market_outcomes
+    market.outcomes
+  end
   
   def buy_price(share_count=nil)
     if share_count.nil?

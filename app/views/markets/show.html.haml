@@ -70,7 +70,8 @@
   
   $(document).ready( function(){ 
     MARKET_ID = #{@market.id};
-    POSITION_ID = #{@market.position.id};
+    POSITION_ID = '#{@latest_position_id}';
+      
     setTimeout('refresh_callback()', 3000);
   });
 

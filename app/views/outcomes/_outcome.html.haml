@@ -11,22 +11,23 @@
     = "%0.2f / %0.2f" % [sell_price, buy_price]
   .span-4.shares  
     - total_purchased = outcome.shares_purchased
-    - if total_purchased and total_purchased > 0 
+    - if p && total_purchased and total_purchased > 0 
       = "%d of %d (%.2f%%)" % [p.total_user_shares, outcome.shares_purchased , 100 * p.total_user_shares / outcome.shares_purchased]
     - else 
-      No buyers
+      = "%d sold" % outcome.shares_purchased
 
   .span-6.last
-    .hidden.my-holdings
-      = p.total_user_shares
       
     - if current_user && ! current_user.admin
       %div.transaction_form
+        - if p
+          .hidden.my-holdings
+            = p.total_user_shares
         - if p && p.total_user_shares > 0
           = form_tag :controller => "markets", :action => "sell", :method => "post" do
             = hidden_field_tag :outcome_id, outcome.id
           
-            = number_field_tag :sell_share_count, [10,p.total_user_shares].min.to_i, :in => 10..p.total_user_shares, :step => 10
+            = number_field_tag :sell_share_count, [1,p.total_user_shares].min.to_i, :in => 1..p.total_user_shares, :step => 1
             = submit_tag "Sell", :disable_with => "Selling ...", :class => "sell-button"
             :javascript
               $('input[name="outcome_id"][value="#{outcome.id}"]').siblings('#sell_share_count').bind('keyup mouseup change', function() {
@@ -40,12 +41,12 @@
                 $('input[name="outcome_id"][value="#{outcome.id}"]').siblings('#sell_share_count').change();
               });
         = form_tag :controller => "markets", :action => "buy", :method => "post" do
-          = number_field_tag :buy_share_count, 10, :in => 10..100, :step => 10
+          = number_field_tag :buy_share_count, 1, :in => 1..100, :step => 1
           = hidden_field_tag :outcome_id, outcome.id
           = submit_tag "Buy", :disable_with => "Buying ...", :class => "buy-button"
           :javascript
             $('input[name="outcome_id"][value="#{outcome.id}"]').siblings('#buy_share_count').bind('keyup mouseup change', function() {
-              var v = $(this).val(), max = #{[outcome.shares_available,(current_user.cash / buy_price).truncate].min};
+              var v = $(this).val(), max = #{"%.02f" % [outcome.shares_available,(current_user.cash / buy_price)].min};
               if(v < 0) { $(this).val(0); return; }
               if(v > max) { $(this).val(max); return; }
               $(this).siblings('.buy-button').attr('value',
