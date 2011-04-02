@@ -15,20 +15,63 @@
   =render @market
     
 :javascript
-  $(document).ready( function(){ 
-      setInterval(function(){ 
-        $.ajax({
-          url: '/markets/#{@market.id}/updates/#{@market.position.id}.json',
-          dataType: 'json',
-          ifModified: true,
-          cache: true,
-          success: function(data, f, b) {
-            if (f != "notmodified"){
-              alert("JSON Data: " + f);  
+  var refresh_callback = function(){ 
+    $.ajax({
+      url: '/markets/'+MARKET_ID+'/updates/'+POSITION_ID+'.json',
+      //url: '/markets/#{@market.id}/updates/845.json',
+      dataType: 'json',
+      ifModified: true,
+      cache: true,
+      error: function(request, status, error){
+        setTimeout('refresh_callback()', 3000);      
+      },
+      success: function(data, f, b) {          
+        if (f != "notmodified"){
+          //add activity
+          $.each(data.activity, function(){
+            $("#market-date").html("As of: " + this.date);
+            
+            var outcome = $("#outcome_" + this.outcome_id);
+            var activityType = "buy";
+            if(this.volume < 0){
+              activityType = "sell";
             }
-          }
-        })
-    }, 3000);
+            
+            outcome.addClass(activityType);
+            outcome.removeClass(activityType, 2400);
+            outcome.find(".activity").prepend(
+              "<div class='span-4 user-activity user-"+activityType+"'>" + this.user + 
+              " <span class='user-activity-volume'>" + Math.abs(this.volume) + 
+              "</span>@<span class='user-activity-price'>" + this.price + "</span></div>");
+          
+            var myHoldings = outcome.find('.my-holdings').html();
+            outcome.find(".shares").html( 
+              Math.round(myHoldings) + " of " + Math.round(this.total_purchased) + 
+              " ("+(this.total_purchased == 0 ? "0" : (Math.round(100 * myHoldings / this.total_purchased) / 100))+"%)");
+            POSITION_ID = this.id;
+            
+            
+            
+            $('.user-activity').fadeOut(30000);
+          
+          });
+        
+          //display new prices
+          $.each(data.current_outcomes, function(){
+            var outcome = $("#outcome_" + this.id);
+            outcome.find('.prices').html(this.sell_price+' / '+ this.buy_price);
+          } );
+        
+        }        
+        setTimeout('refresh_callback()', 3000);
+      }
+    });
+  }
+  
+  $(document).ready( function(){ 
+    MARKET_ID = #{@market.id};
+    POSITION_ID = #{@market.position.id};
+    setTimeout('refresh_callback()', 3000);
   });
 
       

@@ -9,9 +9,9 @@ class MarketsController < ApplicationController
   
   def show
     @market = Market.find(params[:id])
-    if @market.last_transaction_date
-      fresh_when :last_modified => @market.last_transaction_date.utc, :etag => @market
-    end
+    # if @market.last_transaction_date
+    #      fresh_when :last_modified => @market.last_transaction_date.utc, :etag => @market
+    #    end
   end
   
   def updates
@@ -25,9 +25,18 @@ class MarketsController < ApplicationController
 
     
     @positions = Position.more_recent_positions_for_market(client_recent_position)
-    activity = @positions.map{|p| {:id => p.id,:user=>p.user.username, :volume => p.delta_user_shares}}
+    activity = @positions.map{|p| 
+    {
+      :id => p.id,
+      :outcome_id=> p.outcome.id, 
+      :user=>p.user.username, 
+      :volume => p.delta_user_shares,
+      :price => "%0.2f" % p.outcome_price,
+      :total_purchased => p.outcome.shares_purchased,
+      :date => p.created_at.in_time_zone("Central Time (US & Canada)").strftime("%m/%d/%Y %H:%M:%S")
+    }}
     
-    prices = @market.outcomes.map{|o| {:id => o.id, :sell_price=>o.sell_price, :buy_price=>o.buy_price} }
+    prices = @market.outcomes.map{|o| {:id => o.id, :sell_price=>"%0.2f" % o.sell_price, :buy_price=>"%0.2f" % o.buy_price} }
     render :json => {
       :activity => activity ,
       :current_outcomes   => prices

@@ -3,14 +3,13 @@
   = DateTime.now.strftime("%m/%d/%Y %H:%M:%S")  
 .span-24.last#outcomes
   .span-24.last#outcomes-header
-    .span-4 
+    .span-5 
       &nbsp;
     .span-4
       Outcome
     .span-4 
       Prices
-    .span-12.last
+    .span-6.last
       Owned
   .span-24.last#outcomes-body
-    - cache(:fragment => "market_#{@market.id}_outcomes") do
-      = render @market.outcomes
+    = render @market.outcomes

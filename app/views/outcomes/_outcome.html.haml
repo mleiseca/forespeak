@@ -2,22 +2,24 @@
 - buy_price = outcome.buy_price
 - p = outcome.position_for_user(current_user)
 
-.span-24.last.outcome
-  .span-4
+.span-24.last.outcome(id="outcome_#{outcome.id}")
+  .span-5.activity
     / 100 shares bought by joshe 
-    &nbsp;
   .span-4
     = outcome.description
-  .span-4 
+  .span-4.prices 
     = "%0.2f / %0.2f" % [sell_price, buy_price]
-  .span-4  
+  .span-4.shares  
     - total_purchased = outcome.shares_purchased
     - if total_purchased and total_purchased > 0 
       = "%d of %d (%.2f%%)" % [p.total_user_shares, outcome.shares_purchased , 100 * p.total_user_shares / outcome.shares_purchased]
     - else 
       No buyers
 
-  .span-8.last
+  .span-6.last
+    .hidden.my-holdings
+      = p.total_user_shares
+      
     - if current_user && ! current_user.admin
       %div.transaction_form
         - if p && p.total_user_shares > 0

@@ -83,4 +83,45 @@ body {
 }
 .outcome {
     margin-top: 20px;
+    padding: 5px;    
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.activity{
+    /*this is just to keep an empty div from collapsing*/
+    min-height: 5px; 
+    padding: 2apx;
+    
+}
+
+.buy{
+    background: #99FF99;
+}
+
+.sell{
+    background: #FFCCCC;
+}
+
+.user-sell{
+    color: #FF0000;
+	
+}
+
+.user-buy{
+    color: #339900;
+}
+
+.user-activity-volume{
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.user-activity-price{
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.hidden{
+    display:none;
 }

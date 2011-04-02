@@ -1,9 +1,11 @@
 need to honor an "last_trade_allowed_date"
 
+caching flash messages
 
 only reload section if content has changed (http headers?)
 dont reload if user is interacting with text box? dan??
 
+as of date??
 
 buy: Completed 200 OK in 548ms (Views: 385.0ms | ActiveRecord: 16.6ms)
 reload: Completed 200 OK in 725ms (Views: 288.4ms | ActiveRecord: 7.5ms)
