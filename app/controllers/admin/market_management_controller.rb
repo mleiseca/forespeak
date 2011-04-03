@@ -14,8 +14,23 @@ class Admin::MarketManagementController < ApplicationController
   def create
     # todo: needs test
     @market = Market.new(params[:market])
-    @market.start_date = Date.civil(params[:start_date][:year].to_i, params[:start_date][:month].to_i, params[:start_date][:day].to_i)
-    @market.last_trade_allowed_date = Date.civil(params[:last_trade_allowed_date][:year].to_i, params[:last_trade_allowed_date][:month].to_i, params[:last_trade_allowed_date][:day].to_i)
+    @market.start_date = DateTime.civil(params[:start_date][:year].to_i, 
+      params[:start_date][:month].to_i, 
+      params[:start_date][:day].to_i,
+      params[:start_date][:hour].to_i,
+      params[:start_date][:minute].to_i,
+      0,
+      Rational(-6, 24)
+      )
+    @market.last_trade_allowed_date = DateTime.civil(params[:last_trade_allowed_date][:year].to_i,
+      params[:last_trade_allowed_date][:month].to_i, 
+      params[:last_trade_allowed_date][:day].to_i,
+      params[:last_trade_allowed_date][:hour].to_i,
+      params[:last_trade_allowed_date][:minute].to_i,
+      0,
+      Rational(-6, 24)
+      )
+    
 
     if @market.save
       flash[:notice]  = 'Successfully created market'

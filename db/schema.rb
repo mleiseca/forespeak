@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(:version => 20110403000543) do
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "last_tranasction_position_id"
     t.integer  "last_transaction_position_id"
     t.datetime "last_trade_allowed_date"
   end

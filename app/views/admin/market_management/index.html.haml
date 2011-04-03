@@ -5,10 +5,12 @@
       = market.name
     .span-3
       = market.start_date
-    .span-3
-      = market.end_date
-    .span-8.last
+    .span-4
+      = market.last_trade_allowed_date.in_time_zone("Central Time (US & Canada)").strftime("%m/%d/%Y %H:%M") 
+    .span-4.last
       - if market.end_date.nil?
-        Open
-
+        = link_to "Close market", market_management_path(market)
+      - else
+        Closed
+      
 = link_to "Create market", new_market_management_path

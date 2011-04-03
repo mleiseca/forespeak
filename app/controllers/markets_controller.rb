@@ -54,18 +54,23 @@ class MarketsController < ApplicationController
     outcome_id = params[:outcome_id]
     outcome = Outcome.find(outcome_id)
     
+    if outcome.market.is_closed
+      flash[:error] = "Market is closed"
+      return redirect_to outcome.market      
+    end
+
     current_position = outcome.position_for_user(current_user)
     
     share_count = (params.include? :sell_share_count) ? params[:sell_share_count].to_i : 10
 
     if share_count < 0
       flash[:error] = "Invalid share count"
-      return redirect_to markets_path
+      return redirect_to outcome.market      
     end
     
     if current_position.nil? || (current_position.total_user_shares < share_count)
       flash[:error] = "You don't have any shares to sell"      
-      return redirect_to markets_path    
+      return redirect_to outcome.market      
     else
       total_shares = current_position.total_user_shares - share_count
     end
@@ -101,10 +106,15 @@ class MarketsController < ApplicationController
     end
   end
   
-  
+  # update markets set last_trade_allowed_date = '2011-04-03 11:00'
   def buy
     outcome_id = params[:outcome_id]
     outcome = Outcome.find(outcome_id)
+
+    if outcome.market.is_closed
+      flash[:error] = "Market is closed"
+      return redirect_to outcome.market      
+    end
     
     current_position = outcome.position_for_user(current_user)
 
@@ -112,13 +122,13 @@ class MarketsController < ApplicationController
 
     if share_count < 0
       flash[:error] = "Invalid share count"
-      return redirect_to markets_path
+      return redirect_to outcome.market      
     end
 
     total_shares = share_count
     if outcome.shares_available < share_count
       flash[:error] = "There are not enough shares available"
-      return redirect_to markets_path    
+      return redirect_to outcome.market      
     end
 
     if ! current_position.nil?

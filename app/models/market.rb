@@ -33,7 +33,7 @@ class Market < ActiveRecord::Base
   
   validates_associated :outcomes
   
-  validates_presence_of :name ,:start_date
+  validates_presence_of :name ,:start_date, :last_trade_allowed_date
 
   # todo: should this be added back? not sure how to use this with factory girl...
   # validates_uniqueness_of :name
@@ -55,5 +55,9 @@ class Market < ActiveRecord::Base
     self.position = position
     
     self.delay.cache_numbers    
+  end
+  
+  def is_closed
+    self.last_trade_allowed_date.utc < DateTime.now.utc
   end
 end

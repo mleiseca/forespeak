@@ -1,5 +1,10 @@
+#last-trade-allowed-date
+  Last trade allowed at: 
+  = @market.last_trade_allowed_date.in_time_zone("Central Time (US & Canada)").strftime("%m/%d/%Y %H:%M") 
+
+
 #market-date
-  As of:
+  Last updated:
   = DateTime.now.strftime("%m/%d/%Y %H:%M:%S")  
 .span-24.last#outcomes
   .span-24.last#outcomes-header

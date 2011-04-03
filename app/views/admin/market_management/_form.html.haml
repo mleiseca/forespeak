@@ -8,12 +8,12 @@
     = f.text_field :name
   .p 
     Start Date: 
-    = select_date DateTime.now , :prefix => :start_date
+    = select_datetime DateTime.now , :prefix => :start_date
 
 
   .p 
     Last trade allowed date: 
-    = select_date DateTime.now.to_time.advance(:days => 10).to_date, :prefix => :last_trade_allowed_date
+    = select_datetime DateTime.now.to_time.advance(:days => 10).to_datetime, :prefix => :last_trade_allowed_date
 
   - f.fields_for :outcomes do |builder|
     = render "outcome_fields", :f => builder
