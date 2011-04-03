@@ -1,22 +1,22 @@
 
 %table
-	%tr
-		%th Username
-		%th Email
-		%th Cash
-		%th Current Book Value
-			
-	- @users.each do |user|
-		%tr
-			%td= user.username
-			%td= user.email
-			%td= "%0.2f" % user.cash
-			/ %td= link_to "Show", user
-			%td= "%0.2f" % user.all_positions_value
+  %tr
+    %th Username
+    %th Email
+    %th Cash
+    %th Current Book Value
+      
+  - @users.each do |user|
+    %tr
+      %td= user.username
+      %td= user.email
+      %td= "%0.2f" % user.cash
+      / %td= link_to "Show", user
+      %td= "%0.2f" % user.all_positions_value
 
 
 - if ! current_user.nil? && current_user.admin?
-	= form_tag :controller => "users", :action => "resupply", :method => "post" do
-		= text_field_tag(:amount)
-		= submit_tag "Resupply"
-	
+  = form_tag :controller => "users", :action => "resupply", :method => "post" do
+    = text_field_tag(:amount)
+    = submit_tag "Resupply"
+  

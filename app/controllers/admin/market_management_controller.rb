@@ -14,6 +14,9 @@ class Admin::MarketManagementController < ApplicationController
   def create
     # todo: needs test
     @market = Market.new(params[:market])
+    @market.start_date = Date.civil(params[:start_date][:year].to_i, params[:start_date][:month].to_i, params[:start_date][:day].to_i)
+    @market.last_trade_allowed_date = Date.civil(params[:last_trade_allowed_date][:year].to_i, params[:last_trade_allowed_date][:month].to_i, params[:last_trade_allowed_date][:day].to_i)
+
     if @market.save
       flash[:notice]  = 'Successfully created market'
       redirect_to market_management_path(@market)
@@ -22,6 +25,9 @@ class Admin::MarketManagementController < ApplicationController
     end
   end
 
+  def show
+    @market = Market.find(params[:id])
+  end 
   # todo: needs test....also should be in outcome, not here
   def close
     outcome = Outcome.find(params[:outcome_id])
