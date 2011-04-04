@@ -58,6 +58,6 @@ class Market < ActiveRecord::Base
   end
   
   def is_closed
-    self.last_trade_allowed_date.utc < DateTime.now.utc
+    (self.end_date) || (self.last_trade_allowed_date.utc < DateTime.now.utc)
   end
 end
